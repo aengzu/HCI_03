@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class ImageAssets
 {
-  // use static const to avoid hard coding
-  // ex) static const nightRain = 'assets/images/nightRain.png';
+
   static const logo = 'assets/images/logo.png';
+  static const sender = 'assets/images/sender_img.png';
+  static const receiver ='assets/images/receiver_img.png';
 
 }

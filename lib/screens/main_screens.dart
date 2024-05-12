@@ -22,10 +22,10 @@ class _MainScreensState extends State<MainScreens> {
         index: _selectedIndex,
         children: [
           // 캘린더, 대결상황(홈), 친구, 마이페이지
-          CalendarScreen(),
+          const CalendarScreen(),
           BattleScreen(),
-          FriendScreen(),
-          MyPageScreen(),
+          const FriendScreen(),
+          // MyPageScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -39,18 +39,23 @@ class _MainScreensState extends State<MainScreens> {
           });
         },
         items: const [
-          BottomNavigationBarItem(label: '캘린더', icon: Icon(
-            Icons.calendar_month,
-          )),
-          BottomNavigationBarItem(label: '대결상황', icon: Icon(
-            FontAwesomeIcons.flag
-          )),
-          BottomNavigationBarItem(label: '친구', icon: Icon(
-            Icons.people,
-          )),
-          BottomNavigationBarItem(label: '마이페이지', icon: Icon(
-            Icons.person,
-          )),
+          BottomNavigationBarItem(
+              label: '캘린더',
+              icon: Icon(
+                Icons.calendar_month,
+              )),
+          BottomNavigationBarItem(
+              label: '대결상황', icon: Icon(FontAwesomeIcons.flag)),
+          BottomNavigationBarItem(
+              label: '친구',
+              icon: Icon(
+                Icons.people,
+              )),
+          BottomNavigationBarItem(
+              label: '마이페이지',
+              icon: Icon(
+                Icons.person,
+              )),
         ],
       ),
     );

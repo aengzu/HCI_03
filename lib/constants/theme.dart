@@ -16,40 +16,32 @@ ThemeData theme() {
 // AppBarTheme 정의
 AppBarTheme appTheme() {
   return AppBarTheme(
-      centerTitle: false,
-      color: Colors.white,
-      elevation: 0.0,
-      titleTextStyle: textTheme().titleMedium);
+    centerTitle: false,
+    color: Colors.white,
+    elevation: 0.0,
+    titleTextStyle: textTheme().titleMedium
+  );
 }
 
 // 사용자 정의 폰트 (Noto Sans Korean)
 TextTheme textTheme() {
-  return const TextTheme(
+  return TextTheme(
     // DisplayLarge 텍스트 스타일.
-    displayLarge:
-        TextStyle(fontFamily: 'NotoSansKR', fontSize: 24, color: Colors.black),
+    displayLarge: TextStyle(fontFamily: 'NotoSansKR', fontSize: 24, color: Colors.black),
     // 버튼
-    displayMedium: TextStyle(
-        fontFamily: 'NotoSansKR',
-        fontSize: 20,
-        color: Colors.white,
-        fontWeight: FontWeight.w100),
+    displayMedium: TextStyle(fontFamily: 'NotoSansKR', fontSize: 20, color: Colors.white, fontWeight: FontWeight.w100),
     // BodyLarge 텍스트 스타일.
     bodyLarge: TextStyle(
       fontFamily: 'NotoSansKR',
       fontWeight: FontWeight.w400,
       fontSize: 16.0,
-    ), // BodyMedium 텍스트 스타일.
+    ),    // BodyMedium 텍스트 스타일.
     bodyMedium: TextStyle(
       fontFamily: 'NotoSansKR',
       fontWeight: FontWeight.w400,
       fontSize: 14.0,
     ),
     // TitleLarge 텍스트 스타일.
-    titleMedium: TextStyle(
-        fontFamily: 'NotoSansKR',
-        fontSize: 20,
-        color: Colors.black,
-        fontWeight: FontWeight.bold),
+    titleMedium: TextStyle(fontFamily: 'NotoSansKR', fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
   );
 }

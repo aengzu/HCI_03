@@ -9,8 +9,9 @@ class NoticeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: double.infinity,
+      width: screenWidth*0.9,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color(0xFFFFE7F1),
@@ -28,7 +29,7 @@ class NoticeBox extends StatelessWidget {
             ),
             Text(
               notice.description,
-              style: textTheme().bodyLarge
+              style: textTheme().bodyMedium,
             ),
           ],
         ),

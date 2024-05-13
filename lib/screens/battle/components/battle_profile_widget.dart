@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/constants/theme.dart';
 
 class BattleProfileWidget extends StatelessWidget {
@@ -81,7 +82,7 @@ class BattleProfileWidget extends StatelessWidget {
           child: isProfileClicked
               ? pieChart(percentage, context)
               : Image.asset(
-                  'assets/images/receiver_img.png',
+                  ImageAssets.receiver,
                   width: 120,
                   height: 120,
                 ),

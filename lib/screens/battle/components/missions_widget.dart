@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:hci_03/constants/image_assets.dart';
 
 class MissionsWidget extends StatelessWidget {
   final Map mission;
@@ -27,12 +28,12 @@ class MissionsWidget extends StatelessWidget {
               },
               child: mission["checked"]
                   ? Image.asset(
-                      'assets/images/checked_own.png',
+                      ImageAssets.checkedOwn,
                       width: 24,
                       height: 24,
                     )
                   : Image.asset(
-                      'assets/images/unchecked_own.png',
+                      ImageAssets.uncheckedOwn,
                       width: 24,
                       height: 24,
                     )),
@@ -43,7 +44,7 @@ class MissionsWidget extends StatelessWidget {
                     .bodyMedium!
                     .copyWith(fontWeight: FontWeight.w500)),
           ),
-          Image.asset('assets/images/unchecked_opposite.png'),
+          Image.asset(ImageAssets.uncheckedOpposite),
         ],
       ),
     );

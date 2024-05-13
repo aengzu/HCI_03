@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/components/custom_btn.dart';
+import 'package:hci_03/screens/components/custom_light_btn.dart';
 
 import '../../constants/image_assets.dart';
 import '../components/appbar_preffered_size.dart';
@@ -21,18 +22,8 @@ class CalendarScreen extends StatelessWidget {
           bottom: appBarBottomLine(),
         ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomButton(label: '버튼 테스트용', onPressed: (){},),
-            Text('텍스트 테스트 : 제작 시 삭제'),
-            Text('displayLarge', style: textTheme().displayLarge),
-            Text('titleMedium', style: textTheme().titleMedium),
-            Text('bodyLarge', style: textTheme().bodyLarge),
-            Text('기본 글꼴'),
-          ],
-        ),
-      )
+        child: Text('캘린더'),
+      ),
     );
   }
 }

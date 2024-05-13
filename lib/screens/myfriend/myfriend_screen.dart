@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hci_03/screens/myfriend/components/friends_header.dart';
 
 import '../../constants/image_assets.dart';
 import '../../constants/theme.dart';
@@ -19,22 +20,11 @@ class FriendScreen extends StatelessWidget {
     onPressed: () {}, // 아이콘 버튼 클릭 이벤트 처리
     ),],
           bottom: appBarBottomLine(),),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        body: Column(
             children: [
-              CustomButton(label: '버튼 테스트용', onPressed: (){},),
-              Text('텍스트 테스트 : 제작 시 삭제'),
-
-              Text('displayLarge', style: textTheme().displayLarge),
-              Text('titleMedium', style: textTheme().titleMedium),
-              Text('bodyLarge', style: textTheme().bodyLarge),
-              Text('기본 글꼴'),
-
-
+              FriendsHeader(),
             ],
-          ),
-        )
+        ),
     );
   }
 }

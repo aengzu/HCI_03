@@ -43,5 +43,7 @@ TextTheme textTheme() {
     ),
     // TitleLarge 텍스트 스타일.
     titleMedium: TextStyle(fontFamily: 'NotoSansKR', fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+    titleLarge: TextStyle(fontFamily: 'NotoSansKR', fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold),
+
   );
 }

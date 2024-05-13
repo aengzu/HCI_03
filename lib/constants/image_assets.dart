@@ -8,5 +8,9 @@ class ImageAssets
   static const logo = 'assets/images/logo.png';
   static const sender = 'assets/images/sender_img.png';
   static const receiver ='assets/images/receiver_img.png';
+  static const checkedOpposite ='assets/images/checked_opposite.png';
+  static const checkedOwn ='assets/images/checked_own.png';
+  static const uncheckedOpposite ='assets/images/unchecked_opposite.png';
+  static const uncheckedOwn ='assets/images/unchecked_own.png';
 
 }

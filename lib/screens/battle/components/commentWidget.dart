@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hci_03/constants/image_assets.dart';
 
 class CommentWidget extends StatelessWidget {
   final Map comment;
@@ -24,12 +25,12 @@ class CommentWidget extends StatelessWidget {
               },
               child: comment["checked"]
                   ? Image.asset(
-                      'assets/images/checked_own.png',
+                      ImageAssets.checkedOwn,
                       width: 24,
                       height: 24,
                     )
                   : Image.asset(
-                      'assets/images/unchecked_own.png',
+                      ImageAssets.uncheckedOwn,
                       width: 24,
                       height: 24,
                     )),

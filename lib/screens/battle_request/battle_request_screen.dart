@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hci_03/models/request_title.dart';
-import 'package:hci_03/screens/battle_request/components/notice_box.dart';
+import 'package:hci_03/screens/components/notice_box.dart';
 
 import '../../constants/image_assets.dart';
 import '../components/appbar_preffered_size.dart';

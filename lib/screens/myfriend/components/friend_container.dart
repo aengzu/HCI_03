@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/models/friend.dart';
 

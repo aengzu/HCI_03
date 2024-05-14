@@ -43,7 +43,7 @@ class _MainScreensState extends State<MainScreens> {
             Icons.calendar_month,
           )),
           BottomNavigationBarItem(label: '대결상황', icon: Icon(
-            FontAwesomeIcons.flag
+            FontAwesomeIcons.flag,
           )),
           BottomNavigationBarItem(label: '친구', icon: Icon(
             Icons.people,

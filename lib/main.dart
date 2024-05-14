@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:hci_03/screens/main_screens.dart';
+import 'package:hci_03/constants/theme.dart';
+import 'package:hci_03/controllers/friends_controller.dart';
 
-import 'constants/theme.dart';
+import 'opponent_provider.dart';
 
 void main() {
-  runApp(const MiracleApp());
-
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => OpponentProvider(),
+      child: MiracleApp(),
+    ),
+  );
 }
-
 
 class MiracleApp extends StatelessWidget {
   const MiracleApp({super.key});

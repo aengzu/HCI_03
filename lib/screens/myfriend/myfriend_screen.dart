@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hci_03/controllers/friends_controller.dart';
 import 'package:hci_03/screens/myfriend/components/friends_header.dart';
 import '../../constants/image_assets.dart';
 import '../../constants/theme.dart';
 import '../components/appbar_preffered_size.dart';
 import '../components/custom_btn.dart';
+import 'components/current_opponent_box.dart';
 import 'components/friends_body.dart';
 
 
 class FriendScreen extends StatelessWidget {
-  const FriendScreen({super.key});
-
+  final FriendsController friendsController = FriendsController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
         actions: [
@@ -25,9 +27,9 @@ class FriendScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          FriendsHeader(),
+          FriendsHeader(controller: friendsController),
           Expanded(
-            child: FriendsBody(), // FriendsBody를 Expanded로 감싸서 사용합니다.
+            child: FriendsBody(controller: friendsController), // FriendsBody를 Expanded로 감싸서 사용합니다.
           ),
         ],
       ),

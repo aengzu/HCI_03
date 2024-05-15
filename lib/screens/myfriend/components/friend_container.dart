@@ -10,7 +10,7 @@ class FriendContainer extends StatelessWidget {
     required this.friend,
   }) : super(key: key);
 
-  final Friend friend; // 채팅 메시지 객체 선언
+  final Friend friend; // 친구 객체 설정
 
   @override
   Widget build(BuildContext context) {

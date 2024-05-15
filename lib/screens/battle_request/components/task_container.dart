@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:hci_03/controllers/task_controller.dart';
 import 'package:hci_03/models/task.dart';
 import 'package:hci_03/screens/battle_request/components/task_addbtn.dart';
 import 'package:hci_03/screens/battle_request/components/task_item.dart';
 
-class TaskContainer extends StatefulWidget {
-  @override
-  _TaskContainerState createState() => _TaskContainerState();
-}
+class TaskContainer extends StatelessWidget {
 
-class _TaskContainerState extends State<TaskContainer> {
-  List<Task> tasks = List.from(dummyTasks); // Initialize with dummyTasks
-
-  void addTask(String title, String emoji) {
-    setState(() {
-      tasks.add(Task(title: title, emoji: emoji, isChecked: false));
-    });
-  }
+  final TaskController taskController = TaskController();
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    // 태스크 컨트롤러를 통해 띄우게 될 더미 태스크 가져옴
+    List<Task> tasks = taskController.defualtTasks;
 
     return Container(
       width: screenWidth * 0.80,
       child: ListView.builder(
-        itemCount: tasks.length + 1, // Increase the item count by 1
+        itemCount: tasks.length + 1,
         itemBuilder: (context, index) {
           if (index == tasks.length) {
-            // Return TaskButton for the last item
-            return TaskAddButton(addTask: addTask);
+            // 태스크 추가하기 클릭 시
+            return TaskAddButton(addTask: (title, emoji) {
+              taskController.defualtTasks.add(Task(title: title, emoji: emoji, isChecked: false));
+            });
           } else {
-            // Return TaskItem for other items
+            // 태스크 아이템 리턴
             return TaskItem(task: tasks[index]);
           }
         },

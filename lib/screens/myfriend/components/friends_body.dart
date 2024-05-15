@@ -40,7 +40,7 @@ class FriendsBody extends StatelessWidget {
                         title: '친구 추가',
                         hintText: '친구의 아이디를 입력하세요',
                         onConfirm: (friendId) {
-                             // 추가로직 구현
+                             // TODO: 친구 추가로직 구현
                         },
                       );
                     },

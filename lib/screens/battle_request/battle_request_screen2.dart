@@ -19,6 +19,7 @@ class BattleRequestScreen2 extends StatelessWidget {
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
     return Scaffold(
+      // 상단바
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
         actions: [
@@ -33,19 +34,20 @@ class BattleRequestScreen2 extends StatelessWidget {
           SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-            child: NoticeBox(notice: dummyNotices[1]),
+            child: NoticeBox(notice: dummyNotices[1]), // 공지 박스
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 10),
+          Text('내 태스크', style: textTheme().titleMedium,),
+          SizedBox(height: 10),
           Container(
             height: 350,
-            child: TaskContainer(),
+            child: TaskContainer(), // 태스크 리스트들
           ),
           SizedBox(height: 50),
           CustomButtonLight(
             label: '다음으로',
             onPressed: () {
-              // 현재 대결상대 잘 들어갔는지 테스트
-              print("Current Opponent: ${currentOpponent?.name}");
+              print(currentOpponent?.name);
               // 완료 화면 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle/battle_screen.dart';
+import 'package:hci_03/screens/battle_request/battle_request_screen4.dart';
 import 'package:provider/provider.dart';
 import 'package:hci_03/controllers/friends_controller.dart';
 import 'package:hci_03/models/request_title.dart';
@@ -47,7 +48,7 @@ class BattleRequestScreen3 extends StatelessWidget {
               // Handle the button press
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return BattleScreen();
+                  return BattleRequestScreen4();
                 },
               ));
             },

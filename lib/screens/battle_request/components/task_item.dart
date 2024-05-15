@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/models/task.dart';
-import 'package:provider/provider.dart';
-
-
-import '../../../task_provider.dart';
 
 class TaskItem extends StatelessWidget {
   final Task task;
+  final Function(Task) onToggleCheck;
 
-  TaskItem({required this.task});
+  TaskItem({required this.task, required this.onToggleCheck});
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +31,11 @@ class TaskItem extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0), // 왼쪽에 패딩 추가
             child: GestureDetector(
               onTap: () {
-                Provider.of<TaskProvider>(context, listen: false).toggleTaskCheck(task);
+                onToggleCheck(task); // 탭하면 체크
               },
-              child: Consumer<TaskProvider>(
-                builder: (context, taskProvider, child) {
-                  return Icon(
-                    task.isChecked ? Icons.check_circle : Icons.radio_button_unchecked,
-                    color: task.isChecked ? Colors.green : Colors.grey,
-                  );
-                },
+              child: Icon( // 탭하면 체크 표시되도록 함
+                task.isChecked ? Icons.check_circle : Icons.radio_button_unchecked,
+                color: task.isChecked ? Colors.green : Colors.grey,
               ),
             ),
           ),

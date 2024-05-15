@@ -10,7 +10,7 @@ import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:provider/provider.dart';
 import '../../constants/image_assets.dart';
-
+// NOTE: 대결 신청하기(상대방 검색) UI
 class BattleRequestScreen1 extends StatelessWidget {
   const BattleRequestScreen1({super.key});
 
@@ -34,14 +34,14 @@ class BattleRequestScreen1 extends StatelessWidget {
             child: NoticeBox(notice: dummyNotices[0]),
           ),
           SizedBox(height: 40),
-          _buildProfile(),
+          _buildProfile(), // 프로필 생성
           SizedBox(height: 40),
           CustomTextField(),
           SizedBox(height: 50),
           CustomButtonLight(
             label: '대결 상대 신청',
             onPressed: () {
-              // 더미 데이터
+              // 더미 데이터를 currnetOpponenet 로 설정
               Friend dummyOpponent = Friend(
                 id: "dummy",
                 name: "🐶길동이",
@@ -55,7 +55,7 @@ class BattleRequestScreen1 extends StatelessWidget {
 
               // 다음 화면 이동 (대결 태스크 설정)
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
+                builder: (context) { // 다음 설정 화면으로 이동
                   return BattleRequestScreen2();
                 },
               ));
@@ -66,6 +66,7 @@ class BattleRequestScreen1 extends StatelessWidget {
     );
   }
 
+  // 프로필 이미지 생성 build 함수
   Widget _buildProfile() {
     return Container(
       child: Column(

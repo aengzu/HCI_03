@@ -13,13 +13,13 @@ import 'package:hci_03/constants/image_assets.dart';
 import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
-
+// NOTE: 대결 신청 완료 UI
 class BattleRequestScreen3 extends StatelessWidget {
   const BattleRequestScreen3({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // NOTE: Provider 를 통해 현재 대결 상대에 접근 가능합니다.
+    // NOTE: Provider 를 통해 현재 대결 상대에 접근
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
     return Scaffold(
@@ -39,13 +39,13 @@ class BattleRequestScreen3 extends StatelessWidget {
           SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-            child: NoticeBox(notice: dummyNotices[2]), // 공지 박스로 dummyData 값을 활용했습니다.
+            child: NoticeBox(notice: dummyNotices[2]), // 공지 박스 컨텐트는 더미데이터로 접근
           ),
           SizedBox(height: 100),
           CustomButtonLight(
             label: '확인',
             onPressed: () {
-              // Handle the button press
+              // 버튼 클릭시 최종 태스크 안내 화면으로 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   return BattleRequestScreen4();
@@ -60,8 +60,9 @@ class BattleRequestScreen3 extends StatelessWidget {
     );
   }
 
+  // 프로필 생성 build함수
   Widget _buildProfile(Friend? opponent) {
-    // 현재 대결 상대가 없을 경우엔 따로 처리합니다.
+    // 현재 대결 상대가 없을 경우엔 따로 처리
     if (opponent == null) {
       return Container(
         child: Column(

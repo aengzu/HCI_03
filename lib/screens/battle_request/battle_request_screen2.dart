@@ -9,13 +9,13 @@ import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:provider/provider.dart';
 import '../../constants/image_assets.dart';
 import 'battle_request_screen3.dart';
-
+// NOTE: 태스크 설정 화면 UI
 class BattleRequestScreen2 extends StatelessWidget {
   const BattleRequestScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // NOTE: Provider 를 통해 현재 대결 상대에 접근 가능합니다.
+    // NOTE: Provider 를 통해 현재 대결 상대에 접근
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
     return Scaffold(
@@ -41,14 +41,15 @@ class BattleRequestScreen2 extends StatelessWidget {
           SizedBox(height: 10),
           Container(
             height: 350,
-            child: TaskContainer(), // 태스크 리스트들
+            child: TaskContainer(), // 태스크 리스트들 담는 위젯
           ),
           SizedBox(height: 50),
           CustomButtonLight(
             label: '다음으로',
             onPressed: () {
+              // 현재 대결 상대 잘 저장됐는지 테스
               print(currentOpponent?.name);
-              // 완료 화면 이동
+              // 버튼 클릭시 대결 신청 완료 화면 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   return BattleRequestScreen3();

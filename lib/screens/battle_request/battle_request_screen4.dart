@@ -9,16 +9,14 @@ import '../../constants/image_assets.dart';
 import '../../models/request_title.dart';
 import '../../models/task.dart';
 import '../../opponent_provider.dart';
-import '../../task_provider.dart';
-
+// NOTE: 대결 태스크 최종 공지 UI
 class BattleRequestScreen4 extends StatelessWidget {
   const BattleRequestScreen4({super.key});
 
   @override
   Widget build(BuildContext context) {
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
-    TaskController taskController = TaskController();
-    TaskProvider taskProvider = TaskProvider();
+    TaskController taskController = Provider.of<TaskController>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,14 +43,11 @@ class BattleRequestScreen4 extends StatelessWidget {
           CustomButtonLight(
             label: '확인',
             onPressed: () {
-              // Provider 가 관리하는 최종 태스크 목록에 체크된 애들 저장하기
-              taskController.saveTasks(taskProvider);
-              // 저장 잘 됐는 지 테스트
-              print('체크된 테스크들');
-              print(taskProvider.tasks.map((e) => e.title));
+              taskController.saveTasks();
               // 배틀 화면으로 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
+                  // 일단 누르면 main 배틀 화면으로 이
                   return BattleScreen();
                 },
               ));
@@ -63,6 +58,7 @@ class BattleRequestScreen4 extends StatelessWidget {
     );
   }
 
+  // 태스크 리스트 섹션 build
   Widget _buildTaskSection(String title, List<Task> tasks, TaskController taskController, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,6 +73,7 @@ class BattleRequestScreen4 extends StatelessWidget {
     );
   }
 
+  // 태스크 아이템 build
   Widget _buildTaskItem(Task task, TaskController taskController, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
@@ -96,17 +93,14 @@ class BattleRequestScreen4 extends StatelessWidget {
         ),
         child: Row(
           children: [
+            // 만약 체크 클릭시 체크 표시되도록
             GestureDetector(
               onTap: () {
-                Provider.of<TaskProvider>(context, listen: false).toggleTaskCheck(task);
+                taskController.toggleTask(task);
               },
-              child: Consumer<TaskProvider>(
-                builder: (context, taskProvider, child) {
-                  return Icon(
-                    task.isChecked ? Icons.check_circle : Icons.radio_button_unchecked,
-                    color: task.isChecked ? Colors.green : Colors.grey,
-                  );
-                },
+              child: Icon(
+                task.isChecked ? Icons.check_circle : Icons.radio_button_unchecked,
+                color: task.isChecked ? Colors.green : Colors.grey,
               ),
             ),
             SizedBox(width: 10),

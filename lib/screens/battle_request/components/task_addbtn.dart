@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
-import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle_request/components/task_add_dialog.dart';
+
+import '../../../constants/theme.dart';
 
 class TaskAddButton extends StatelessWidget {
   final Function(String, String) addTask;
@@ -14,7 +16,7 @@ class TaskAddButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
       child: GestureDetector(
         onTap: () {
-          // Show the dialog when the button is pressed
+          // Show the New Task Dialog
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -24,7 +26,7 @@ class TaskAddButton extends StatelessWidget {
         },
         child: Container(
           width: screenWidth * 0.80,
-          height: 60.0,  // Set height to match TaskItem
+          height: 60.0,
           decoration: BoxDecoration(
             color: Color(0xffE6FFEA),
             borderRadius: BorderRadius.circular(15),

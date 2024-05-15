@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/components/small_btn.dart';
@@ -69,7 +68,7 @@ class NewTaskDialog extends StatelessWidget {
             SmallGreyButton(label: '취소', onPressed: () {
               Navigator.of(context).pop();
             }),
-            SizedBox(width: 10), // Add space between the buttons
+            SizedBox(width: 10),
             SmallButton(label: '추가', onPressed: () {
               addTask(_taskController.text, _emojiController.text);
               Navigator.of(context).pop();
@@ -80,4 +79,3 @@ class NewTaskDialog extends StatelessWidget {
     );
   }
 }
-

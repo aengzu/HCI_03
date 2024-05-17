@@ -62,7 +62,7 @@ class _BattleScreenState extends State<BattleScreen> {
           bottom: appBarBottomLine(),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
           child: Column(
             children: [
               const PromiseWidget(),

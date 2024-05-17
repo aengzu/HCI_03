@@ -12,5 +12,6 @@ class ImageAssets
   static const checkedOwn ='assets/images/checked_own.png';
   static const uncheckedOpposite ='assets/images/unchecked_opposite.png';
   static const uncheckedOwn ='assets/images/unchecked_own.png';
+  static const defaultProfile ='assets/images/default_profile.png';
 
 }

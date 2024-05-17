@@ -22,4 +22,8 @@ List<Notice> dummyNotices = [
     title: '☑️ 대결 설정 완료!',
     description: '함께할 공통의 목표가 정해졌어요! 정해진 목표는 매일매일 지켜야해요. 그럼 화이팅 !🌱️',
   ),
+  Notice(
+    title: '이번달 공약',
+    description: '지는 사람이 베스타 사기☺️',
+  ),
 ];

@@ -52,6 +52,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: TableCalendar(
+                  headerStyle: HeaderStyle(headerMargin: EdgeInsets.symmetric(vertical: 10.0),titleCentered: true, titleTextStyle: textTheme().titleSmall!),
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: _focusedDay,
@@ -67,14 +68,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     CalendarFormat.month: 'Month'
                   },
                   daysOfWeekStyle: DaysOfWeekStyle(
-                    weekdayStyle: textTheme().bodySmall ?? TextStyle(fontSize: 12), // 평일 글꼴 스타일
-                    weekendStyle: textTheme().bodySmall?.copyWith(color: Colors.red) ?? TextStyle(fontSize: 12, color: Colors.red), // 주말 글꼴 스타일
+                    weekdayStyle: textTheme().bodySmall!, // 평일 글꼴 스타일
+                    weekendStyle: textTheme().bodySmall!.copyWith(color: Colors.red), // 주말 글꼴 스타일
                   ),
                   calendarBuilders: CalendarBuilders(
                     defaultBuilder: (context, day, focusedDay) {
                       if (day.isBefore(DateTime.now())) { // 과거 날짜 스타일
                         return Container(
-                          margin: const EdgeInsets.all(4.0),
+                          margin: const EdgeInsets.all(5.0),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: _getDayColor(day), // 날짜에 따른 색상 지정
@@ -87,7 +88,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         );
                       } else if (isSameDay(day, DateTime.now())) { // 오늘 날짜 스타일
                         return Container(
-                          margin: const EdgeInsets.all(4.0),
+                          margin: const EdgeInsets.all(10.0),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 2),
@@ -95,7 +96,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           ),
                           child: Text(
                             '${day.day}',
-                            style: textTheme().bodySmall?.copyWith(color: Colors.black) ?? TextStyle(color: Colors.black), // 글씨색 검정색
+                            style: textTheme().bodySmall!, // 글씨색 검정색
                           ),
                         );
                       }

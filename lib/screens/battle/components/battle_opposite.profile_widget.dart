@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle/spur_on_screen.dart';
+import 'package:hci_03/screens/components/small_btn.dart';
 
 class BattleOppositeProfileWidget extends StatelessWidget {
   const BattleOppositeProfileWidget({super.key});
@@ -11,10 +13,7 @@ class BattleOppositeProfileWidget extends StatelessWidget {
       children: [
         Text(
           '길동이',
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(fontWeight: FontWeight.bold),
+          style: textTheme().titleMedium,
         ),
         const SizedBox(
           height: 5.0,
@@ -25,7 +24,7 @@ class BattleOppositeProfileWidget extends StatelessWidget {
           height: 120,
         ),
         const SizedBox(
-          height: 15.0,
+          height: 16.0,
         ),
         GestureDetector(
           onTap: () {
@@ -36,14 +35,14 @@ class BattleOppositeProfileWidget extends StatelessWidget {
             ));
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
+            padding: const EdgeInsets.symmetric(vertical: 7.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: const Color(0xff4cd663).withOpacity(0.7),
                 borderRadius: BorderRadius.circular(12)),
             width: 120,
             child: Text(
-              '격려하기 👍🏻',
+              ' 격려하기 👍🏻',
               style: Theme.of(context)
                   .textTheme
                   .bodySmall!

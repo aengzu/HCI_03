@@ -6,6 +6,9 @@ import 'package:hci_03/screens/battle/components/commentWidget.dart';
 import 'package:hci_03/screens/battle/components/input_spur_comment_widget.dart';
 import 'package:hci_03/screens/battle/components/spur_on_top_bar_widget.dart';
 import 'package:hci_03/screens/components/appbar_preffered_size.dart';
+import 'package:hci_03/screens/components/custom_light_btn.dart';
+
+import '../../constants/theme.dart';
 
 class SpurOnScreen extends StatefulWidget {
   SpurOnScreen({super.key});
@@ -26,10 +29,7 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
     return Column(children: [
       Text(
         '길동이',
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(fontWeight: FontWeight.bold),
+        style: textTheme().titleMedium
       ),
       const SizedBox(
         height: 5.0,
@@ -81,10 +81,10 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
             ),
             targetProfile(),
             const SizedBox(
-              height: 18.0,
+              height: 17.0,
             ),
-            Flexible(
-              flex: 2,
+            Container(
+              height: 300.0,
               child: ListView.builder(
                 itemCount: widget.comments.length,
                 padding:
@@ -98,33 +98,16 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
                 },
               ),
             ),
-            Flexible(
-                flex: 1,
+            Expanded(
                 child: Column(
                   children: [
                     const InputSpurCommentWidget(),
                     const SizedBox(
-                      height: 20.0,
+                      height: 25.0,
                     ),
-                    GestureDetector(
-                      onTap: () {
+                      CustomButtonLight(label: "전송", onPressed: (){
                         Navigator.pop(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            color: const Color(0xff4cd663).withOpacity(0.7)),
-                        child: Text(
-                          '전송',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ),
-                    )
+                      })
                   ],
                 )),
           ],

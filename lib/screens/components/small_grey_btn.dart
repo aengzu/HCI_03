@@ -12,7 +12,7 @@ class SmallGreyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35.0, // 버튼의 높이 설정// 화면 가로 크기의 80%에 해당하는 너비 설정
+      height: 35.0, // 버튼의 높이 설정
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xffC5C9C6), // 버튼의 배경색

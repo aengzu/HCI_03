@@ -67,10 +67,7 @@ class BattleProfileWidget extends StatelessWidget {
       children: [
         Text(
           '나',
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(fontWeight: FontWeight.bold),
+          style: textTheme().titleMedium,
         ),
         const SizedBox(
           height: 5.0,

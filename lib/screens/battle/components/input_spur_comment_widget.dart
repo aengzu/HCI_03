@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hci_03/constants/theme.dart';
 
 class InputSpurCommentWidget extends StatelessWidget {
   const InputSpurCommentWidget({super.key});
@@ -6,10 +7,9 @@ class InputSpurCommentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       alignment: Alignment.center,
-      width: 250,
-      height: 40,
+      width: 200,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: const Color(0xffe6ffea),
@@ -22,11 +22,7 @@ class InputSpurCommentWidget extends StatelessWidget {
           ]),
       child: Text(
         '직접 입력하기 ✏️',
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(fontWeight: FontWeight.w600),
-      ),
+        style: textTheme().titleSmall),
     );
   }
 }

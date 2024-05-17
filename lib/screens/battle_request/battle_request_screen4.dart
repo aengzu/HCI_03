@@ -4,6 +4,7 @@ import 'package:hci_03/models/friend.dart';
 import 'package:hci_03/screens/battle/battle_screen.dart';
 import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
+import 'package:hci_03/screens/main_screens.dart';
 import 'package:provider/provider.dart';
 import '../../constants/image_assets.dart';
 import '../../models/request_title.dart';
@@ -48,7 +49,7 @@ class BattleRequestScreen4 extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   // 일단 누르면 main 배틀 화면으로 이
-                  return BattleScreen();
+                  return MainScreens();
                 },
               ));
             },

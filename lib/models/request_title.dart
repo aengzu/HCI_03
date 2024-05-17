@@ -26,4 +26,8 @@ List<Notice> dummyNotices = [
     title: '대결 신청 완료!',
     description: '이제 상대방이 대결 신청을 수락하면 대결이 시작돼요 ☺️',
   ),
+  Notice(
+    title: '이번달 공약',
+    description: '지는 사람이 베스타 사기☺️',
+  ),
 ];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'battle/battle_screen.dart';
-import 'calendar/calendar_screen.dart';
+import 'package:hci_03/screens/battle/battle_screen.dart';
+import 'package:hci_03/screens/calendar/calendar_screen.dart';
 import 'myfriend/myfriend_screen.dart';
 import 'mypage/mypage_screen.dart';
 

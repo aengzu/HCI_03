@@ -11,10 +11,10 @@ class SpurOnScreen extends StatefulWidget {
   SpurOnScreen({super.key});
 
   List<Map> comments = [
-    {"comment": "오늘도 열심히 하고 있어요!\n당신의 노력은 보람 있어요.", "checked": false},
-    {"comment": "어떤 일이든 해낼 수 있어요!\n당신은 강하고 뛰어나니까요.", "checked": false},
-    {"comment": "매일 조금씩 나아가는 것이 중요해요.\n오늘도 조금씩 나아가면 됩니다.", "checked": false},
-    {"comment": "당신은 대단해요! \n괜찮아요, 조금만 더 힘내면 되죠.", "checked": false},
+    {"comment": "오늘도 열심히 하고 있어요! 당신의 노력은 보람 있어요.", "checked": false},
+    {"comment": "어떤 일이든 해낼 수 있어요! 당신은 강하고 뛰어나니까요.", "checked": false},
+    {"comment": "매일 조금씩 나아가는 것이 중요해요. 오늘도 조금씩 나아가면 됩니다.", "checked": false},
+    {"comment": "당신은 대단해요! 괜찮아요, 조금만 더 힘내면 되죠.", "checked": false},
   ];
 
   @override
@@ -72,7 +72,7 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
         bottom: appBarBottomLine(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
         child: Column(
           children: [
             const SpurOnTopBarWidget(),

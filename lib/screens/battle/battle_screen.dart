@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hci_03/screens/battle/components/battle_opposite.profile_widget.dart';
 import 'package:hci_03/screens/battle/components/battle_profile_widget.dart';
 import 'package:hci_03/screens/battle/components/missions_widget.dart';
@@ -82,7 +84,7 @@ class _BattleScreenState extends State<BattleScreen> {
                 ],
               ),
               const SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Expanded(
                 child: ListView.builder(
@@ -96,7 +98,7 @@ class _BattleScreenState extends State<BattleScreen> {
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         ));

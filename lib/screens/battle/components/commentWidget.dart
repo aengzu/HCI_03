@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hci_03/constants/image_assets.dart';
 
 class CommentWidget extends StatelessWidget {
@@ -37,8 +38,10 @@ class CommentWidget extends StatelessWidget {
           const SizedBox(
             width: 8.0,
           ),
-          IntrinsicWidth(
+          Flexible(
             child: Text(comment["comment"],
+                softWrap: true,
+                overflow: TextOverflow.visible,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!

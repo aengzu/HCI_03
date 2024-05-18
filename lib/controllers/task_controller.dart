@@ -17,9 +17,15 @@ class TaskController with ChangeNotifier {
     Task(title: "비타민 먹기", emoji: "💊", isChecked: true),
     Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
     Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
+    Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
+    Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
   ];
 
   List<Task> opponentSelectedTasks = [
+    Task(title: "도서관 가기", emoji: "📚"),
+    Task(title: "러닝 30분 하기", emoji: "🏃"),
+    Task(title: "도서관 가기", emoji: "📚"),
+    Task(title: "러닝 30분 하기", emoji: "🏃"),
     Task(title: "도서관 가기", emoji: "📚"),
     Task(title: "러닝 30분 하기", emoji: "🏃"),
   ];

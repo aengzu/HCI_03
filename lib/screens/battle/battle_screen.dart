@@ -5,8 +5,10 @@ import 'package:hci_03/screens/battle/components/battle_opposite.profile_widget.
 import 'package:hci_03/screens/battle/components/battle_profile_widget.dart';
 import 'package:hci_03/screens/battle/components/missions_widget.dart';
 import 'package:hci_03/screens/battle/components/promise_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/image_assets.dart';
+import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 
 class BattleScreen extends StatefulWidget {
@@ -52,6 +54,7 @@ class _BattleScreenState extends State<BattleScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Image.asset(ImageAssets.logo, width: 100),

@@ -18,37 +18,35 @@ class CurrentOpponentBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
+
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('현재 대결 상대', style: textTheme().titleMedium),
-          const SizedBox(height: 15.0),
+          SizedBox(height: screenHeight*0.02),
           const Divider(thickness: 0.9, color: Colors.grey),
           currentOpponent == null
               ? _buildNoOpponentMessage(context)
               : FriendContainer(friend: currentOpponent!),
-          SizedBox(height: 20),
+          SizedBox(height: screenHeight*0.02),
         ],
       ),
     );
   }
 
   Widget _buildNoOpponentMessage(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     return Column(
       children: [
-        SizedBox(height: 20.0),
+        SizedBox(height: screenHeight*0.02),
         Text('현재 대결 상대가 없습니다.', textAlign: TextAlign.center),
-        SizedBox(height: 10.0),
-        SmallButton(label: "아이디로 추가하기", onPressed: () {
-
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return BattleRequestScreen1();
-            },
-          ));
-        }),
-        SizedBox(height: 10.0),
+        SizedBox(height:  screenHeight*0.02),
         const Divider(thickness: 0.9, color: Colors.grey),
       ],
     );

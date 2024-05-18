@@ -19,6 +19,9 @@ class BattleRequestScreen3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     // NOTE: Provider 를 통해 현재 대결 상대에 접근
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
@@ -34,14 +37,14 @@ class BattleRequestScreen3 extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 30),
+          SizedBox(height: screenHeight*0.03),
           _buildProfile(currentOpponent),
-          SizedBox(height: 50),
+          SizedBox(height: screenHeight*0.04),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
             child: NoticeBox(notice: dummyNotices[2]), // 공지 박스 컨텐트는 더미데이터로 접근
           ),
-          SizedBox(height: 100),
+          SizedBox(height: screenHeight*0.09),
           CustomButtonLight(
             label: '확인',
             onPressed: () {
@@ -68,7 +71,7 @@ class BattleRequestScreen3 extends StatelessWidget {
         child: Column(
           children: [
             Text("No Opponent Selected", style: textTheme().titleMedium),
-            SizedBox(height: 10),
+            SizedBox(height: 10.0),
           ],
         ),
       );

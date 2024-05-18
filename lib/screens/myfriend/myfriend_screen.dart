@@ -13,7 +13,12 @@ class FriendScreen extends StatelessWidget {
   final FriendsController friendsController = FriendsController();
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),

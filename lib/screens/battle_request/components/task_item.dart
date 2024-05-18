@@ -10,11 +10,13 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
       child: Container(
-        width: screenWidth * 0.80,
-        height: 62.0, // Fixed height
+        alignment: Alignment.center,
+        width: screenWidth * 0.8,
+        height: screenHeight *0.08, // Fixed height
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -39,7 +41,7 @@ class TaskItem extends StatelessWidget {
               ),
             ),
           ),
-          title: Text(task.title + " " + task.emoji),
+          title: Text(task.title + " " + task.emoji,),
         ),
       ),
     );

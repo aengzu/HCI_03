@@ -15,10 +15,14 @@ class BattleRequestScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     // NOTE: Provider 를 통해 현재 대결 상대에 접근
     Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // 상단바
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
@@ -31,19 +35,19 @@ class BattleRequestScreen2 extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 30),
+          SizedBox(height: screenHeight*0.03),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
             child: NoticeBox(notice: dummyNotices[1]), // 공지 박스
           ),
-          SizedBox(height: 10),
+          SizedBox(height: screenHeight*0.01),
           Text('내 태스크', style: textTheme().titleMedium,),
-          SizedBox(height: 10),
+          SizedBox(height: screenHeight*0.01),
           Container(
-            height: 350,
+            height: screenHeight*0.43,
             child: TaskContainer(), // 태스크 리스트들 담는 위젯
           ),
-          SizedBox(height: 50),
+          SizedBox(height: screenHeight*0.06),
           CustomButtonLight(
             label: '다음으로',
             onPressed: () {

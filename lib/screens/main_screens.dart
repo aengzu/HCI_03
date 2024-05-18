@@ -18,16 +18,19 @@ class _MainScreensState extends State<MainScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
+      resizeToAvoidBottomInset: false,
+      body:
+      IndexedStack(
         index: _selectedIndex,
         children: [
           // 캘린더, 대결상황(홈), 친구, 마이페이지
-          CalendarScreen(),
           BattleScreen(),
+          CalendarScreen(),
           FriendScreen(),
           MyPageScreen(),
         ],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
@@ -39,11 +42,11 @@ class _MainScreensState extends State<MainScreens> {
           });
         },
         items: const [
-          BottomNavigationBarItem(label: '캘린더', icon: Icon(
-            Icons.calendar_month,
-          )),
           BottomNavigationBarItem(label: '대결상황', icon: Icon(
             FontAwesomeIcons.flag,
+          )),
+          BottomNavigationBarItem(label: '캘린더', icon: Icon(
+            Icons.calendar_month,
           )),
           BottomNavigationBarItem(label: '친구', icon: Icon(
             Icons.people,

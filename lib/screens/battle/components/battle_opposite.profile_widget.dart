@@ -3,16 +3,22 @@ import 'package:flutter/widgets.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle/spur_on_screen.dart';
 import 'package:hci_03/screens/components/small_btn.dart';
+import 'package:provider/provider.dart';
+
+import '../../../opponent_provider.dart';
 
 class BattleOppositeProfileWidget extends StatelessWidget {
   const BattleOppositeProfileWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Provider를 사용하여 currentOpponent 가져오기
+    final currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
+
     return Column(
       children: [
         Text(
-          '길동이',
+          currentOpponent?.name ?? '길동이',
           style: textTheme().titleMedium,
         ),
         const SizedBox(

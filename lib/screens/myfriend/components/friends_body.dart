@@ -15,6 +15,10 @@ class FriendsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
+
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),

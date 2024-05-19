@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hci_03/constants/theme.dart';
-import 'package:hci_03/models/request_title.dart';
-import 'package:hci_03/screens/components/custom_btn.dart';
-import 'package:hci_03/screens/components/custom_light_btn.dart';
-import 'package:hci_03/screens/components/grey_btn.dart';
-import 'package:hci_03/screens/components/notice_box.dart';
-import 'package:hci_03/screens/components/small_btn.dart';
-import 'package:hci_03/screens/components/small_grey_btn.dart';
-
+import 'package:hci_03/models/friend.dart';
+import 'package:hci_03/opponent_provider.dart';
+import 'package:hci_03/screens/mypage/components/achievements_section.dart';
+import 'package:hci_03/screens/mypage/components/profile_section.dart';
+import 'package:provider/provider.dart';
+import 'package:sizing/sizing.dart';
 import '../../constants/image_assets.dart';
 import '../components/appbar_preffered_size.dart';
 
@@ -16,53 +13,81 @@ class MyPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String name = "나";
+    String bio = "열심히 하자!";
+    String profileImage = ImageAssets.receiver;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Image.asset(ImageAssets.logo, width: 100),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.settings), // 설정 아이콘
-              onPressed: () {}, // 아이콘 버튼 클릭 이벤트 처리
-            ),],
-          bottom: appBarBottomLine(),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // NOTE: notice box - 상단에 띄우는 공지 박스, tile 과 description 입력
-             // NoticeBox(notice: Notice(title: '공지 📣', description: '공지 des')),
-              NoticeBox(notice: dummyNotices[0]), // <- dummyNotices 로도 사용 가능
-              SizedBox(height: 10,),
-              // NOTE: small 비활성화 버튼
-              SmallGreyButton(label: 'small', onPressed: (){}),
-              SizedBox(height: 10,),
-              // NOTE: small 활성화 버튼
-              SmallButton(label: 'small', onPressed: (){}),
-              SizedBox(height: 10,),
-              // NOTE: 비활성화 버튼
-              GreyButton(label: 'grey 버튼 테스트', onPressed: (){}),
-              SizedBox(height: 10,),
-              // NOTE: 기본 버튼
-              CustomButton(label: 'basic 버튼 테스트용', onPressed: (){},),
-              SizedBox(height: 10,),
-              // NOTE: 연한 버튼
-              CustomButtonLight(label: 'light 버튼 테스트용', onPressed: (){},),
-              // NOTE: tilteLarge 큰 볼드체
-              Text('titleLarge, 대결 진행상황', style: textTheme().titleLarge),
-              // NOTE: tileMedium 중간 볼드체
-              Text('titleMedium', style: textTheme().titleMedium),
-              // NOTE: titleSmall 작은 볼드체
-              Text('titleSmall, 모든 친구 목록', style: textTheme().titleSmall),
-              // NOTE: bodyLarge 큰 일반체 (태스크 이거로 작성 혹은
-              Text('bodyLarge, 성수님이 대결 신청', style: textTheme().bodyLarge),
-              // NOTE: bodyMedium 중간 일반체
-              Text('bodyMedium, 비타민 먹기 💊', style: textTheme().bodyMedium),
-              // NOTE: bodySmall 작은 일반체
-              Text('bodySmall, 상대방의 도전에 응하시겠습니까?', style: textTheme().bodySmall),
-            ],
+      appBar: AppBar(
+        title: Image.asset(ImageAssets.logo, width: 100),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings), // 설정 아이콘
+            onPressed: () {}, // 아이콘 버튼 클릭 이벤트 처리
           ),
-        )
+        ],
+        bottom: appBarBottomLine(),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 0.05.sh),
+          _buildProfile(profileImage),
+          SizedBox(height: 0.02.sh),
+          ProfileSection(title: "이름", content: name),
+          SizedBox(height: 0.05.sh),
+          ProfileSection(title: "소개", content: bio),
+          SizedBox(height: 0.05.sh),
+          AchievementsSection(title: "업적"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfile(String imageUrl) {
+    if (imageUrl.isEmpty) {
+      return CircleAvatar(
+        radius: 55.5,
+        backgroundColor: Color(0xffaac0af), // 더미 이미지 색상
+        child: Icon(
+          Icons.person, // 더미 아이콘
+          size: 70,
+          color: Colors.white,
+        ),
+      );
+    }
+
+    return Stack(
+      children: [
+        SizedBox(
+          width: 100,
+          height: 100,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(55.5), // 이미지 모서리 둥글기
+            child: Image.asset(
+              imageUrl,
+              fit: BoxFit.cover, // 이미지 채우기 방식
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0, // 포지션 조정
+          child: Container(
+            width: 20,
+            height: 20,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15), // 모서리 둥글기
+              color: Colors.grey[100], // 배경색
+            ),
+            child: const Icon(
+              Icons.camera_alt_outlined,
+              size: 15, // 아이콘 크기
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

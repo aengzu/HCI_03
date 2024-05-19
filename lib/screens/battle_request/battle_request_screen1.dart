@@ -9,6 +9,7 @@ import 'package:hci_03/screens/battle_request/components/custom_textfield.dart';
 import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:provider/provider.dart';
+import 'package:sizing/sizing.dart';
 import '../../constants/image_assets.dart';
 // NOTE: 대결 신청하기(상대방 검색) UI
 class BattleRequestScreen1 extends StatelessWidget {
@@ -78,7 +79,10 @@ class BattleRequestScreen1 extends StatelessWidget {
           SizedBox(height: 10),
           Text(friend.name, style: textTheme().titleMedium),
           SizedBox(height: 10),
-          Text(friend.bio, style: textTheme().bodyMedium),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0.15.sw),
+            child: Text(friend.bio, style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis,),
+          ),
         ],
       ),
     );

@@ -15,8 +15,8 @@ import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
 // NOTE: 대결 신청 완료 UI
-class BattleRequestScreen3 extends StatelessWidget {
-  const BattleRequestScreen3({super.key});
+class FriendDetailScreen extends StatelessWidget {
+  const FriendDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

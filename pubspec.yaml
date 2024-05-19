@@ -43,6 +43,7 @@ dependencies:
   fl_chart: ^0.68.0
   table_calendar: ^3.0.5
   provider: ^6.1.2
+  sizing: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

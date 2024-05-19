@@ -3,7 +3,7 @@ import 'package:hci_03/models/friend.dart';
 
 class FriendsController {
   List<Friend> friends = [ // dummyFirneds
-    Friend(id: "jyj", name: "전영주", profileImage: ImageAssets.sender, bio: "안녕하세요"),
+    Friend(id: "jyj", name: "전영주", profileImage: ImageAssets.sender, bio: "안녕하세요. 저는 전영주입니다. 저는 현재 토익을 공부하고 있습니다. 토익 850점이 목표입니다."),
     Friend(id: "kss", name: "김성수", profileImage: ImageAssets.sender, bio: "반가워요"),
     Friend(id: "kbj", name: "김병주", profileImage: ImageAssets.sender, bio: "같이 힘내봐요."),
     Friend(id: "jy", name: "장영", profileImage: ImageAssets.sender, bio: "아자아자"),

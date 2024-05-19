@@ -27,6 +27,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
@@ -45,13 +48,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: Column(
           children: [
             const PromiseWidget(), // 상단에 PromiseWidget 추가
-            const SizedBox(
-              height: 15.0,
+            SizedBox(
+              height: screenHeight*0.015,
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: TableCalendar(
+                  rowHeight: screenHeight*0.067,
                   headerStyle: HeaderStyle(headerMargin: EdgeInsets.symmetric(vertical: 10.0),titleCentered: true, titleTextStyle: textTheme().titleSmall!),
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),

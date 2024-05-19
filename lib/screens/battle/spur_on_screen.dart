@@ -50,6 +50,9 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -76,15 +79,15 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
         child: Column(
           children: [
             const SpurOnTopBarWidget(),
-            const SizedBox(
-              height: 25.0,
+            SizedBox(
+              height: screenHeight*0.035,
             ),
             targetProfile(),
-            const SizedBox(
-              height: 17.0,
+            SizedBox(
+              height: screenHeight*0.02,
             ),
             Container(
-              height: 300.0,
+              height: screenHeight*0.35,
               child: ListView.builder(
                 itemCount: widget.comments.length,
                 padding:
@@ -102,8 +105,8 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
                 child: Column(
                   children: [
                     const InputSpurCommentWidget(),
-                    const SizedBox(
-                      height: 25.0,
+                    SizedBox(
+                      height: screenHeight*0.022,
                     ),
                       CustomButtonLight(label: "전송", onPressed: (){
                         Navigator.pop(context);

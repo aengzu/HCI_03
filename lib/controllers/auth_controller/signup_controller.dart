@@ -8,7 +8,7 @@ class SignUpController extends GetxController {
   RxString token = ''.obs;
 
 
-  Future<void> signUp(String username, String email, String password, String gender, String school) async {
+  Future<void> signUp(String username, String email, String password) async {
     try {
       token.value = await _authService.register(username, email, password);
       if (token.isNotEmpty) {

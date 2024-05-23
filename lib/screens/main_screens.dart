@@ -6,6 +6,7 @@ import 'package:hci_03/screens/auth/login_screen.dart';
 import 'package:hci_03/screens/auth/signup_screen.dart';
 import 'package:hci_03/screens/battle/battle_screen.dart';
 import 'package:hci_03/screens/calendar/calendar_screen.dart';
+import '../controllers/battle_controller.dart';
 import '../controllers/user_controller.dart';
 import 'myfriend/myfriend_screen.dart';
 import 'mypage/mypage_screen.dart';
@@ -19,6 +20,14 @@ class MainScreens extends StatefulWidget {
 
 class _MainScreensState extends State<MainScreens> {
   int _selectedIndex = 0;
+  final BattleController battleController = Get.put(BattleController());
+  final UserController userController = Get.find<UserController>();
+
+  @override
+  void initState() {
+    super.initState();
+    battleController.fetchBattle(userController.user.value.memberId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,7 @@ class _MainScreensState extends State<MainScreens> {
         index: _selectedIndex,
         children: [
           // 캘린더, 대결상황(홈), 친구, 마이페이지
-          BattleScreen(),
+          BattleScreen(battle: battleController.battle.value),
           CalendarScreen(),
           FriendScreen(),
           MyPageScreen(),

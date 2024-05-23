@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/controllers/friends_controller.dart';
-import 'package:hci_03/models/friend.dart';
+import 'package:hci_03/controllers/user_controller.dart';
+import 'package:hci_03/screens/myfriend/components/current_opponent_box.dart';
+import 'package:hci_03/screens/myfriend/components/custom_dialog.dart';
 import 'package:hci_03/screens/myfriend/components/friend_container.dart';
-
-import 'current_opponent_box.dart';
-import 'custom_dialog.dart';
 
 class FriendsBody extends StatelessWidget {
   final FriendController controller;
+  final UserController userController = Get.find<UserController>();
 
-  const FriendsBody({super.key, required this.controller});
+  FriendsBody({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class FriendsBody extends StatelessWidget {
                         hintText: '친구의 아이디를 입력하세요',
                         onConfirm: (friendId) {
                           // 친구 추가 로직 구현
-                          controller.registerFriend(friendId, 'your_member_id');
+                          controller.registerFriend(friendId, userController.user.value.memberId);
                         },
                       );
                     },

@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hci_03/screens/battle/components/battle_opposite.profile_widget.dart';
 import 'package:hci_03/screens/battle/components/battle_profile_widget.dart';
 import 'package:hci_03/screens/battle/components/missions_widget.dart';
 import 'package:hci_03/screens/battle/components/promise_widget.dart';
-import 'package:provider/provider.dart';
+import 'package:hci_03/models/battle.dart';
 
 import '../../constants/image_assets.dart';
-import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 
 class BattleScreen extends StatefulWidget {
-  BattleScreen({
-    super.key,
-  });
+  final Battle battle;
+
+  BattleScreen({required this.battle, super.key});
 
   // 이건 더미임
   List<Map> missions = [
@@ -84,7 +82,7 @@ class _BattleScreenState extends State<BattleScreen> {
                     percentage: widget.percentage,
                     onClickProfile: onClickProfile,
                   ),
-                  const BattleOppositeProfileWidget(),
+                  BattleOppositeProfileWidget(),
                 ],
               ),
               const SizedBox(

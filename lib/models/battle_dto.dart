@@ -3,11 +3,7 @@ class BattleDto {
   final String challengerId;
   final String tasks;
 
-  BattleDto({
-    required this.challengeeId,
-    required this.challengerId,
-    required this.tasks,
-  });
+  BattleDto({required this.challengeeId, required this.challengerId, required this.tasks});
 
   Map<String, dynamic> toJson() {
     return {

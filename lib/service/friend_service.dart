@@ -7,6 +7,7 @@ import 'package:hci_03/models/friend_dto.dart';
 class FriendService {
   final String baseUrl = AppUrl.baseUrl;
 
+  // 친구 등록 메서드
   Future<void> registerFriend(FriendDto friendDto) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/friend/register'),
@@ -21,7 +22,7 @@ class FriendService {
       throw Exception('Failed to register friend');
     }
   }
-
+ // 친구 목록 get 메서드
   Future<List<FriendResponse>> getFriends(String memberId) async {
     final response = await http.get(
       Uri.parse('$baseUrl/api/$memberId/friends'),

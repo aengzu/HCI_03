@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/myfriend/components/friends_header.dart';
 import '../../constants/image_assets.dart';
-import '../../constants/theme.dart';
 import '../../controllers/friends_controller.dart';
 import '../components/appbar_preffered_size.dart';
-import 'components/current_opponent_box.dart';
 import 'components/friends_body.dart';
 
 class FriendScreen extends StatelessWidget {
@@ -38,7 +36,7 @@ class FriendScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          FriendsHeader(controller: friendsController),
+          FriendsHeader(),
           Expanded(
             child: FriendsBody(controller: friendsController), // FriendsBody를 Expanded로 감싸서 사용합니다.
           ),

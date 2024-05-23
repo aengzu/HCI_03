@@ -1,33 +1,67 @@
-import 'package:flutter/material.dart';
-import 'package:hci_03/models/task.dart';
-
-import 'package:hci_03/models/task.dart';
 import 'package:get/get.dart';
+import 'package:hci_03/models/task.dart';
+import 'package:hci_03/service/task_service.dart';
 
 class TaskController extends GetxController {
-  var defualtTasks = <Task>[
-    Task(title: "비타민 먹기", emoji: "💊"),
-    Task(title: "아침 식사하기", emoji: "🍳"),
-    Task(title: "선크림 바르기", emoji: "🌞"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "체육관 가기", emoji: "🏋️"),
-    Task(title: "러닝 20분 하기", emoji: "🏃"),
-  ].obs;
+  var isLoading = false.obs;
+  var tasks = <Task>[].obs;
+  var errorMessage = ''.obs;
 
-  // 선택된 태스크 목록을 반환하는 메서드
-  List<Task> getSelectedTasks() {
-    return defualtTasks.where((task) => task.isChecked).toList();
+  final TaskService taskService = TaskService();
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchAllTasks();
   }
 
-  // 태스크 추가 메서드
-  void addTask(String title, String emoji) {
-    defualtTasks.add(Task(title: title, emoji: emoji, isChecked: false));
+  // 모든 태스크 가져오기
+  Future<void> fetchAllTasks() async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      tasks.value = await taskService.getAllTasks();
+    } catch (e) {
+      errorMessage.value = 'Failed to load tasks: $e';
+    } finally {
+      isLoading.value = false;
+    }
   }
 
-  // 태스크 토글 메서드
+  Future<void> registerTask(String title) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      await taskService.registerTask(title);
+      await fetchAllTasks(); // 새로 태스크를 등록한 후 태스크 목록을 새로고침
+    } catch (e) {
+      errorMessage.value = 'Failed to register task: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> searchTasks(String taskName) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      tasks.value = await taskService.getTasksByName(taskName);
+    } catch (e) {
+      errorMessage.value = 'Failed to search tasks: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   void toggleTask(Task task) {
     task.isChecked = !task.isChecked;
-    defualtTasks.refresh();
+    tasks.refresh(); // UI 갱신을 위해 옵저버블 리스트를 새로 고침
+  }
+
+  List<Task> getSelectedTasks() {
+    return tasks.where((task) => task.isChecked).toList();
   }
 }

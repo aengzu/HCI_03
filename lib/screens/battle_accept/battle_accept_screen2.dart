@@ -8,25 +8,27 @@ import 'package:hci_03/models/request_title.dart';
 import 'package:hci_03/screens/battle_request/components/task_container.dart';
 import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
+import 'package:hci_03/screens/main_screens.dart';
 import 'package:provider/provider.dart';
+import 'package:sizing/sizing.dart';
 import '../../constants/image_assets.dart';
 import '../../controllers/user_controller.dart';
 import '../../models/task.dart';
-import 'battle_request_screen3.dart';
+import 'battle_accept_screen3.dart';
 
-class BattleRequestScreen2 extends StatelessWidget {
-  final Friend friend;
+
+class BattleAcceptScreen2 extends StatelessWidget {
   final BattleController battleController = Get.put(BattleController());
   final TaskController taskController = Get.put(TaskController());
   final UserController userController = Get.find<UserController>();
 
-  BattleRequestScreen2({super.key, required this.friend});
+  BattleAcceptScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
+
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,42 +46,37 @@ class BattleRequestScreen2 extends StatelessWidget {
           SizedBox(height: screenHeight * 0.03),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-            child: NoticeBox(notice: dummyNotices[0]), // 공지 박스
+            child: NoticeBox(notice: dummyNotices[6]), // 공지 박스
           ),
           SizedBox(height: screenHeight * 0.01),
           Text(
             '내 태스크',
             style: textTheme().titleMedium,
           ),
+
+          Padding(
+            padding: EdgeInsets.symmetric(vertical:0.01.sw, horizontal: 0.1.sw),
+            child: Text("아래의 추천 목표에는 상대방이 직접 입력한 목표도 포함되어 있어요", style: textTheme().bodySmall),
+          ),
           SizedBox(height: screenHeight * 0.01),
           Container(
             height: screenHeight * 0.43,
             child: TaskContainer(), // 태스크 리스트들 담는 위젯
           ),
-          SizedBox(height: screenHeight * 0.06),
+          SizedBox(height: screenHeight * 0.02),
           CustomButtonLight(
             label: '다음으로',
             onPressed: () async {
               // 선택된 태스크들을 가져옴
               List<Task> selectedTasks = taskController.getSelectedTasks();
-              String tasks = selectedTasks.map((task) => task.taskName).join(', ');
 
               // 버튼 클릭시 대결 신청
-              await battleController.registerBattle(
-                friend.memberId,
-                userController.user.value.memberId, // 실제 로그인된 사용자의 ID로 변경 필요
-                tasks,
-              );
 
               if (battleController.errorMessage.value.isNotEmpty) {
                 Get.snackbar('Error', battleController.errorMessage.value, snackPosition: SnackPosition.BOTTOM);
               } else {
-                // 대결 신청 완료 화면으로 이동
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return BattleRequestScreen3(friend: friend);
-                  },
-                ));
+                // 현재 메인으로 이동 만약 상대가 수락하면 화면 변경됨
+                Get.to(MainScreens());
               }
             },
           ),

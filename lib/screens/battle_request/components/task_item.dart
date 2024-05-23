@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hci_03/models/task.dart';
+import 'package:sizing/sizing.dart';
 
 class TaskItem extends StatelessWidget {
   final Task task;
@@ -14,9 +15,10 @@ class TaskItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
         alignment: Alignment.center,
         width: screenWidth * 0.8,
-        height: screenHeight *0.08, // Fixed height
+        height: screenHeight * 0.08, // Fixed height
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -41,7 +43,7 @@ class TaskItem extends StatelessWidget {
               ),
             ),
           ),
-          title: Text(task.title + " " + task.emoji,),
+          title: Text(task.taskName),
         ),
       ),
     );

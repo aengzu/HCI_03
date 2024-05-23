@@ -11,10 +11,9 @@ import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:hci_03/constants/image_assets.dart';
 import 'package:sizing/sizing.dart';
-import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
-// NOTE: 대결 신청 완료 UI
+
 class FriendDetailScreen extends StatelessWidget {
   const FriendDetailScreen({super.key});
 
@@ -23,9 +22,6 @@ class FriendDetailScreen extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-    // NOTE: Provider 를 통해 현재 대결 상대에 접근
-    Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
-
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
@@ -39,7 +35,7 @@ class FriendDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: screenHeight*0.03),
-          _buildProfile(currentOpponent),
+         // _buildProfile(currentOpponent),
           SizedBox(height: screenHeight*0.04),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),

@@ -16,8 +16,7 @@ class FriendsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
-    double screenHeight = screenSize.height;
+
 
     return Container(
       margin: EdgeInsets.zero,
@@ -61,7 +60,7 @@ class FriendsBody extends StatelessWidget {
               if (controller.isLoading.value) {
                 return Center(child: CircularProgressIndicator());
               } else if (controller.errorMessage.value.isNotEmpty) {
-                return Center(child: Text(controller.errorMessage.value));
+                return Center(child: Text(" "));
               } else {
                 return ListView.builder(
                   itemCount: controller.friends.length,

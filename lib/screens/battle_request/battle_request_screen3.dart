@@ -11,7 +11,6 @@ import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:hci_03/constants/image_assets.dart';
 import 'package:sizing/sizing.dart';
-import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
 // NOTE: 대결 신청 완료 UI

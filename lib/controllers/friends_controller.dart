@@ -20,7 +20,7 @@ class FriendController extends GetxController {
       await friendService.registerFriend(friendDto);
       await fetchFriends(memberId); // 친구 추가 후 친구 목록 새로고침
     } catch (e) {
-      errorMessage.value = 'Failed to register friend: $e';
+      errorMessage.value = '친구 등록 실패: $e';
     } finally {
       isLoading.value = false;
     }
@@ -33,7 +33,7 @@ class FriendController extends GetxController {
     try {
       friends.value = await friendService.getFriends(memberId);
     } catch (e) {
-      errorMessage.value = 'Failed to load friends: $e';
+      errorMessage.value = '친구가 없습니다. : $e';
     } finally {
       isLoading.value = false;
     }

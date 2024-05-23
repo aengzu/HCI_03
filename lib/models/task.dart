@@ -1,20 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-
-class Task extends ChangeNotifier {
-  // 태스크 모델입니다.
-  String title;
-  String emoji;
+class Task {
+  final String taskName;
+  final int taskNo;
   bool isChecked;
 
-  Task({
-    required this.title,
-    required this.emoji,
-    this.isChecked = false,
-  });
+  Task({required this.taskName, required this.taskNo, this.isChecked = false});
 
-  void toggleCheck() {
-    isChecked = !isChecked;
-    notifyListeners();
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(
+      taskName: json['taskName'],
+      taskNo: json['taskNo'],
+      isChecked: json['isChecked'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'taskName': taskName,
+      'taskNo': taskNo,
+      'isChecked': isChecked,
+    };
   }
 }

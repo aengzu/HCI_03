@@ -22,7 +22,7 @@ class CurrentOpponentBox extends StatelessWidget {
       if (battleController.isLoading.value) {
         return Center(child: CircularProgressIndicator());
       } else if (battleController.errorMessage.value.isNotEmpty) {
-        return Center(child: Text(battleController.errorMessage.value));
+        return _buildNoOpponentMessage(context);
       } else {
         Friend? currentOpponent;
         if (battleController.battle.value.challengee.isNotEmpty) {
@@ -45,7 +45,7 @@ class CurrentOpponentBox extends StatelessWidget {
               currentOpponent == null
                   ? _buildNoOpponentMessage(context)
                   : FriendContainer(friend: currentOpponent),
-              SizedBox(height: screenHeight * 0.02),
+              SizedBox(height: screenHeight * 0.1),
             ],
           ),
         );
@@ -59,6 +59,7 @@ class CurrentOpponentBox extends StatelessWidget {
     double screenHeight = screenSize.height;
     return Column(
       children: [
+        const Divider(thickness: 0.9, color: Colors.grey),
         SizedBox(height: screenHeight * 0.02),
         Text('현재 대결 상대가 없습니다.', textAlign: TextAlign.center),
         SizedBox(height: screenHeight * 0.02),

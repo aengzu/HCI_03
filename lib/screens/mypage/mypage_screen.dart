@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hci_03/models/friend.dart';
-import 'package:hci_03/opponent_provider.dart';
+import 'package:get/get.dart';
+import 'package:sizing/sizing.dart';
+import 'package:hci_03/constants/image_assets.dart';
+import 'package:hci_03/constants/theme.dart';
+import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/mypage/components/achievements_section.dart';
 import 'package:hci_03/screens/mypage/components/profile_section.dart';
-import 'package:provider/provider.dart';
-import 'package:sizing/sizing.dart';
-import '../../constants/image_assets.dart';
 import '../components/appbar_preffered_size.dart';
 
 class MyPageScreen extends StatelessWidget {
@@ -13,10 +13,13 @@ class MyPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.find<UserController>();
 
-    String name = "나";
-    String bio = "열심히 하자!";
-    String profileImage = ImageAssets.receiver;
+    // Fetching user information from the UserController
+    String name = userController.user.value.name;
+    String id = userController.user.value.memberId;
+    String bio = "bio"; // Assuming bio is not yet implemented in UserController
+    String profileImage = ImageAssets.receiver; // Assuming profileImage is not yet implemented in UserController
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +37,7 @@ class MyPageScreen extends StatelessWidget {
         children: [
           SizedBox(height: 0.05.sh),
           _buildProfile(profileImage),
+          Text(id, style: textTheme().titleMedium),
           SizedBox(height: 0.02.sh),
           ProfileSection(title: "이름", content: name),
           SizedBox(height: 0.05.sh),

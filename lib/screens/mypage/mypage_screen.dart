@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizing/sizing.dart';
@@ -16,8 +18,8 @@ class MyPageScreen extends StatelessWidget {
     final UserController userController = Get.find<UserController>();
 
     // Fetching user information from the UserController
-    String name = userController.user.value.name;
-    String id = userController.user.value.memberId;
+    String name = utf8.decode(userController.user.value.name.codeUnits);
+    String id = utf8.decode(userController.user.value.memberId.codeUnits);
     String bio = "bio"; // Assuming bio is not yet implemented in UserController
     String profileImage = ImageAssets.receiver; // Assuming profileImage is not yet implemented in UserController
 

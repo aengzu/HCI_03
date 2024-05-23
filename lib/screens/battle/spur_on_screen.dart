@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import 'package:hci_03/constants/theme.dart';
+import 'package:hci_03/screens/components/appbar_preffered_size.dart';
+import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/battle/components/commentWidget.dart';
 import 'package:hci_03/screens/battle/components/input_spur_comment_widget.dart';
 import 'package:hci_03/screens/battle/components/spur_on_top_bar_widget.dart';
-import 'package:hci_03/screens/components/appbar_preffered_size.dart';
-import 'package:hci_03/screens/components/custom_light_btn.dart';
-
-import '../../constants/theme.dart';
 
 class SpurOnScreen extends StatefulWidget {
-  SpurOnScreen({super.key});
+  final String opponentName;
+
+  SpurOnScreen({required this.opponentName, super.key});
 
   List<Map> comments = [
     {"comment": "오늘도 열심히 하고 있어요! 당신의 노력은 보람 있어요.", "checked": false},
@@ -28,8 +26,8 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
   Widget targetProfile() {
     return Column(children: [
       Text(
-        '길동이',
-        style: textTheme().titleMedium
+        widget.opponentName,
+        style: textTheme().titleMedium,
       ),
       const SizedBox(
         height: 5.0,
@@ -80,18 +78,18 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
           children: [
             const SpurOnTopBarWidget(),
             SizedBox(
-              height: screenHeight*0.035,
+              height: screenHeight * 0.035,
             ),
             targetProfile(),
             SizedBox(
-              height: screenHeight*0.02,
+              height: screenHeight * 0.02,
             ),
             Container(
-              height: screenHeight*0.35,
+              height: screenHeight * 0.35,
               child: ListView.builder(
                 itemCount: widget.comments.length,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return CommentWidget(
                     comment: widget.comments[index],
@@ -106,11 +104,11 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
                   children: [
                     const InputSpurCommentWidget(),
                     SizedBox(
-                      height: screenHeight*0.022,
+                      height: screenHeight * 0.022,
                     ),
-                      CustomButtonLight(label: "전송", onPressed: (){
-                        Navigator.pop(context);
-                      })
+                    CustomButtonLight(label: "전송", onPressed: () {
+                      Navigator.pop(context);
+                    })
                   ],
                 )),
           ],

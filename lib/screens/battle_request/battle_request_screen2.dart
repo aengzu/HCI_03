@@ -25,7 +25,6 @@ class BattleRequestScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
 
     return Scaffold(
@@ -64,22 +63,18 @@ class BattleRequestScreen2 extends StatelessWidget {
               List<Task> selectedTasks = taskController.getSelectedTasks();
               String tasks = selectedTasks.map((task) => task.taskName).join(', ');
 
-              // 버튼 클릭시 대결 신청
+              // 버튼 클릭시 대결 신청 요청을 보냄
               await battleController.registerBattle(
-                friend.memberId,
-                userController.user.value.memberId, // 실제 로그인된 사용자의 ID로 변경 필요
-                tasks,
+                friend.memberId, // 현재 친구의 ID
+                userController.user.value.memberId, // 실제 로그인된 사용자의 ID
+                tasks, // 선택된 태스크들
               );
 
               if (battleController.errorMessage.value.isNotEmpty) {
                 Get.snackbar('Error', battleController.errorMessage.value, snackPosition: SnackPosition.BOTTOM);
               } else {
                 // 대결 신청 완료 화면으로 이동
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return BattleRequestScreen3(friend: friend);
-                  },
-                ));
+                Get.to(BattleRequestScreen3(friend: friend));
               }
             },
           ),

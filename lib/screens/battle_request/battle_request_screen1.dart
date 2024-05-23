@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/controllers/friends_controller.dart';
 import 'package:hci_03/models/friend.dart';
@@ -18,7 +19,6 @@ class BattleRequestScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -47,11 +47,7 @@ class BattleRequestScreen1 extends StatelessWidget {
             CustomButtonLight(
               label: '대결 상대 신청',
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) { // 다음 설정 화면으로 이동
-                    return BattleRequestScreen2(friend: friend);
-                  },
-                ));
+                Get.to(BattleRequestScreen2(friend: friend));
               },
             ),
           ],

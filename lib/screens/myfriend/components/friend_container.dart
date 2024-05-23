@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/models/friend.dart';
 import 'package:hci_03/screens/battle_request/battle_request_screen1.dart';
@@ -31,7 +32,7 @@ class FriendContainer extends StatelessWidget {
         padding: const EdgeInsets.all(10), // 모든 측면에 10의 패딩 적용
         child: Row(
           children: [
-            Image.asset(friend.profileImage, width: 80, height: 80),
+            Image.asset(ImageAssets.receiver, width: 80, height: 80),
             SizedBox(width: screenWidth * 0.035), // 이미지와 텍스트 사이의 간격 설정
             Expanded(
               child: Text(

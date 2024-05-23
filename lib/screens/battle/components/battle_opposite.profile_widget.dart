@@ -18,7 +18,7 @@ class BattleOppositeProfileWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          currentOpponent?.name ?? '길동이',
+           '길동이',
           style: textTheme().titleMedium,
         ),
         const SizedBox(

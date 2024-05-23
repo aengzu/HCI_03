@@ -81,13 +81,13 @@ class FriendDetailScreen extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Text(opponent.name, style: textTheme().titleMedium),
+          Text("길동", style: textTheme().titleMedium),
           SizedBox(height: 0.015.sh),
-          Image.asset(opponent.profileImage, width: 180, height: 180),
+          Image.asset(ImageAssets.receiver, width: 180, height: 180),
           SizedBox(height: 0.01.sh),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.15.sw),
-            child: Text(opponent.bio, style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
+            child: Text("안녕", style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
           ),
         ],
       ),

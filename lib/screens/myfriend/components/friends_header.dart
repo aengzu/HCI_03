@@ -11,7 +11,7 @@ import 'custom_dialog.dart'; // 커스텀 다이얼로그 파일 임포트
 import 'friends_body.dart';
 
 class FriendsHeader extends StatelessWidget {
-  final FriendsController controller;
+  final FriendController controller;
 
   const FriendsHeader({super.key, required this.controller});
 

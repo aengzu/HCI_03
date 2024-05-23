@@ -14,7 +14,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => OpponentProvider()),
-        ChangeNotifierProvider(create: (_) => TaskController()),
       ],
       child: MiracleApp(),
     ),

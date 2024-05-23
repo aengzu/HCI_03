@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:hci_03/controllers/friends_controller.dart';
+import 'package:get/get.dart';
+
+import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/myfriend/components/friends_header.dart';
 import '../../constants/image_assets.dart';
 import '../../constants/theme.dart';
+import '../../controllers/friends_controller.dart';
 import '../components/appbar_preffered_size.dart';
-import '../components/custom_btn.dart';
 import 'components/current_opponent_box.dart';
 import 'components/friends_body.dart';
 
-
 class FriendScreen extends StatelessWidget {
-  final FriendsController friendsController = FriendsController();
+  final FriendController friendsController = Get.put(FriendController());
+  final UserController userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
+
+    // 로그인된 사용자의 아이디를 사용하여 친구 목록을 가져옵니다.
+    friendsController.fetchFriends(userController.user.value.memberId);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

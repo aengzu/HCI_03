@@ -22,7 +22,6 @@ class BattleRequestScreen4 extends StatelessWidget {
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
 
-    Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
     TaskController taskController = Provider.of<TaskController>(context);
 
     return Scaffold(
@@ -49,7 +48,7 @@ class BattleRequestScreen4 extends StatelessWidget {
           ),
 
           SizedBox(height: screenHeight*0.01),
-          Container(height: screenHeight*0.25, child:_buildTaskSection(taskController.getBothSelectedTasks(), taskController, context)),
+          Container(height: screenHeight*0.25, child:_buildTaskSection(taskController.defualtTasks, taskController, context)),
           SizedBox(height: screenHeight*0.04),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -57,12 +56,12 @@ class BattleRequestScreen4 extends StatelessWidget {
           ),
 
           SizedBox(height: screenHeight*0.01),
-          Container(height:screenHeight*0.15, child: _buildTaskSection(taskController.getOpponentSelectedTasks(), taskController, context)),
+          Container(height:screenHeight*0.15, child: _buildTaskSection(taskController.defualtTasks, taskController, context)),
           SizedBox(height: screenHeight*0.03),
           CustomButtonLight(
             label: '확인',
             onPressed: () {
-              taskController.saveTasks();
+          //    taskController.saveTasks();
               // 배틀 화면으로 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {

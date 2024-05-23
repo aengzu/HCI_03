@@ -16,15 +16,14 @@ import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
 // NOTE: 대결 신청 완료 UI
 class BattleRequestScreen3 extends StatelessWidget {
-  const BattleRequestScreen3({super.key});
+  final Friend friend;
+  const BattleRequestScreen3({super.key, required this.friend});
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-    // NOTE: Provider 를 통해 현재 대결 상대에 접근
-    Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +38,7 @@ class BattleRequestScreen3 extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: screenHeight*0.03),
-          _buildProfile(currentOpponent),
+          _buildProfile(friend),
           SizedBox(height: screenHeight*0.04),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
@@ -66,28 +65,16 @@ class BattleRequestScreen3 extends StatelessWidget {
 
   // 프로필 생성 build함수
   Widget _buildProfile(Friend? opponent) {
-    // 현재 대결 상대가 없을 경우엔 따로 처리
-    if (opponent == null) {
-      return Container(
-        child: Column(
-          children: [
-            Text("No Opponent Selected", style: textTheme().titleMedium),
-            SizedBox(height: 10.0),
-          ],
-        ),
-      );
-    }
-    // 그 외에는 현재 대결 상대의 정보를 get 할 수 있습니다.
     return Container(
       child: Column(
         children: [
-          Text(opponent.name, style: textTheme().titleMedium),
+          Text(friend.name, style: textTheme().titleMedium),
           SizedBox(height: 0.015.sh),
-          Image.asset(opponent.profileImage, width: 180, height: 180),
+          Image.asset(ImageAssets.receiver, width: 180, height: 180),
           SizedBox(height: 0.01.sh),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.15.sw),
-            child: Text(opponent.bio, style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
+            child: Text("안녕", style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
           ),
         ],
       ),

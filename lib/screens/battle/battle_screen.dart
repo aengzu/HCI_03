@@ -16,6 +16,7 @@ class BattleScreen extends StatefulWidget {
     super.key,
   });
 
+  // 이건 더미임
   List<Map> missions = [
     {"mission_name": "비타민 먹기 💊", "checked": false},
     {"mission_name": "아침식사하기 🥘", "checked": false},

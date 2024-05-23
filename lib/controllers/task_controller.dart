@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hci_03/models/task.dart';
 
-class TaskController with ChangeNotifier {
-  // Dummy tasks for demonstration purposes
-  List<Task> defualtTasks = [
+import 'package:hci_03/models/task.dart';
+import 'package:get/get.dart';
+
+class TaskController extends GetxController {
+  var defualtTasks = <Task>[
     Task(title: "비타민 먹기", emoji: "💊"),
     Task(title: "아침 식사하기", emoji: "🍳"),
     Task(title: "선크림 바르기", emoji: "🌞"),
@@ -11,52 +13,21 @@ class TaskController with ChangeNotifier {
     Task(title: "러닝 30분 하기", emoji: "🏃"),
     Task(title: "체육관 가기", emoji: "🏋️"),
     Task(title: "러닝 20분 하기", emoji: "🏃"),
-  ];
+  ].obs;
 
-  List<Task> bothSelectedTasks = [
-    Task(title: "비타민 먹기", emoji: "💊", isChecked: true),
-    Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
-    Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
-    Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
-    Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
-  ];
-
-  List<Task> opponentSelectedTasks = [
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-  ];
-
-  List<Task> getBothSelectedTasks() {
-    return bothSelectedTasks;
+  // 선택된 태스크 목록을 반환하는 메서드
+  List<Task> getSelectedTasks() {
+    return defualtTasks.where((task) => task.isChecked).toList();
   }
 
-  List<Task> getOpponentSelectedTasks() {
-    return opponentSelectedTasks;
-  }
-
-  void toggleTask(Task task) {
-    // task 의 체크 여부를 변경하게 됨.
-    task.isChecked = !task.isChecked;
-    notifyListeners();
-  }
-
+  // 태스크 추가 메서드
   void addTask(String title, String emoji) {
-    if (title.isNotEmpty) { // addTask 를 하면 defalutTask 더미데이터에 일단 추가됩니다.
-      defualtTasks.add(Task(title: title, emoji: emoji));
-      notifyListeners();
-    }
+    defualtTasks.add(Task(title: title, emoji: emoji, isChecked: false));
   }
 
-  void saveTasks() {
-    List<Task> selectedTasks = [
-      ...bothSelectedTasks.where((task) => task.isChecked),
-      ...opponentSelectedTasks.where((task) => task.isChecked),
-    ];
-    // 테스트를 위해 출력
-    selectedTasks.forEach((task) => print('Selected Task: ${task.title}'));
+  // 태스크 토글 메서드
+  void toggleTask(Task task) {
+    task.isChecked = !task.isChecked;
+    defualtTasks.refresh();
   }
 }

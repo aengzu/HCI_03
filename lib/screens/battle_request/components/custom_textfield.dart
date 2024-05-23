@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hci_03/constants/theme.dart';
 
+import '../../../models/friend.dart';
+
 class CustomTextField extends StatelessWidget {
+  final Friend friend;
+  const CustomTextField({super.key, required this.friend});
+
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -23,9 +29,10 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         textAlign: TextAlign.center,
+        enabled: false,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: '(아이디)',
+          hintText: friend.memberId,
           hintStyle: textTheme().bodyLarge,
         ),
       ),

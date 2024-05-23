@@ -1,18 +1,54 @@
-
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:hci_03/service/auth_service.dart';
+import 'package:hci_03/screens/main_screens.dart';
+import 'package:http/http.dart' as http;
+import 'package:hci_03/constants/app_url.dart';
+import 'package:hci_03/models/user.dart';
+import 'package:hci_03/controllers/user_controller.dart';
 
-
-// NOTE : 로그인 컨트롤러 스켈레톤 코드입니다.
 class LoginController extends GetxController {
-  final AuthService _authService = AuthService();
-  RxString token = ''.obs;
+  final String _apiUrl;
 
-  Future<void> login(String username, String password) async {
+  LoginController() : _apiUrl = "${AppUrl.baseUrl}/api/member/login";
+
+  var isLoading = false.obs;
+  var errorMessage = ''.obs;
+
+  TextEditingController memberIdController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Future<void> login(String memberId, String password) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
     try {
-      token.value = await _authService.login(username, password);
+      final response = await http.post(
+        Uri.parse(_apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'memberId': memberId,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // 로그인 성공
+        var userJson = jsonDecode(response.body);
+        User user = User.fromJson(userJson);
+        Get.find<UserController>().setUser(user);
+        Get.to(() => MainScreens());
+      } else {
+        errorMessage.value = 'Failed to login: ${response.statusCode}';
+        Get.snackbar('Error', errorMessage.value, snackPosition: SnackPosition.TOP);
+      }
     } catch (e) {
-      Get.snackbar("Login Failed", e.toString());
+      errorMessage.value = 'Failed to login: $e';
+      Get.snackbar('Error', errorMessage.value, snackPosition: SnackPosition.TOP);
+    } finally {
+      isLoading.value = false;
     }
   }
 }

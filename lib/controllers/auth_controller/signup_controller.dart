@@ -1,21 +1,82 @@
-import 'package:get/get.dart';
+import 'dart:convert';
+import 'package:hci_03/models/user.dart';
 import 'package:hci_03/screens/main_screens.dart';
-import 'package:hci_03/service/auth_service.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:hci_03/constants/app_url.dart';
 
-// NOTE : 회원가입 컨트롤러 스켈레톤 코드입니다.
 class SignUpController extends GetxController {
-  final AuthService _authService = AuthService();
-  RxString token = ''.obs;
+  final String baseUrl = AppUrl.baseUrl;
+  final String _apiUrl;
 
+  SignUpController() : _apiUrl = "${AppUrl.baseUrl}/api/member/register";
 
-  Future<void> signUp(String username, String email, String password) async {
+  var isLoading = false.obs;
+  var errorMessage = ''.obs;
+  var isDeviceKeyLoaded = false.obs;
+
+  TextEditingController memberIdController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  String deviceKey = '';
+
+  @override
+  void onInit() {
+    super.onInit();
+    _getDeviceKey();
+  }
+
+  Future<void> _getDeviceKey() async {
     try {
-      token.value = await _authService.register(username, email, password);
-      if (token.isNotEmpty) {
-        Get.offAll(() => MainScreens());  // 회원가입 후 메인 페이지로 리다이렉션
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      if (GetPlatform.isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        deviceKey = androidInfo.id!;
+      } else if (GetPlatform.isIOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        deviceKey = iosInfo.identifierForVendor!;
       }
     } catch (e) {
-      Get.snackbar("Sign Up Failed", e.toString());
+      errorMessage.value = 'Failed to get device key: $e';
+    } finally {
+      isDeviceKeyLoaded.value = true;
+    }
+  }
+
+  Future<void> signUp(String memberId, String name, String password) async {
+    User user = User(
+      deviceKey: deviceKey,
+      memberId: memberId,
+      name: name,
+      password: password,
+    );
+
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      final response = await http.post(
+        Uri.parse(_apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(user.toJson()),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Signup successful
+        Get.to(MainScreens());
+
+      } else {
+        errorMessage.value = 'Failed to sign up: ${response.statusCode}';
+      }
+    } catch (e) {
+      errorMessage.value = 'Failed to sign up: $e';
+    } finally {
+      isLoading.value = false;
     }
   }
 }

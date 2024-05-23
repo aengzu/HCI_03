@@ -4,7 +4,7 @@ import '../../constants/theme.dart';
 
 class SmallGreyButton extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const SmallGreyButton({Key? key, required this.label, required this.onPressed})
       : super(key: key);

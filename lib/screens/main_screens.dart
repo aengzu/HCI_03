@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:hci_03/screens/auth/login_screen.dart';
 import 'package:hci_03/screens/auth/signup_screen.dart';
 import 'package:hci_03/screens/battle/battle_screen.dart';
 import 'package:hci_03/screens/calendar/calendar_screen.dart';
+import '../controllers/user_controller.dart';
 import 'myfriend/myfriend_screen.dart';
 import 'mypage/mypage_screen.dart';
 

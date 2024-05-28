@@ -8,7 +8,7 @@ import 'package:hci_03/screens/main_screens.dart';
 import '../../constants/image_assets.dart';
 import '../../models/request_title.dart';
 import '../../models/task.dart';
-// NOTE: 대결 태스크 최종 공지 UI
+
 class BattleRequestScreen4 extends StatelessWidget {
   final TaskController taskController = Get.put(TaskController());
 
@@ -17,10 +17,7 @@ class BattleRequestScreen4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -47,15 +44,17 @@ class BattleRequestScreen4 extends StatelessWidget {
           SizedBox(height: screenHeight * 0.01),
           Container(
             height: screenHeight * 0.25,
-            child: Obx(() {
-              if (taskController.isLoading.value) {
-                return Center(child: CircularProgressIndicator());
-              } else if (taskController.errorMessage.value.isNotEmpty) {
-                return Center(child: Text(taskController.errorMessage.value));
-              } else {
-                return _buildTaskSection(taskController.tasks, taskController, context);
-              }
-            }),
+            child: GetBuilder<TaskController>(
+              builder: (controller) {
+                if (controller.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.errorMessage.value.isNotEmpty) {
+                  return Center(child: Text(controller.errorMessage.value));
+                } else {
+                  return _buildTaskSection(controller.tasks, controller, context);
+                }
+              },
+            ),
           ),
           SizedBox(height: screenHeight * 0.04),
           Padding(
@@ -65,26 +64,24 @@ class BattleRequestScreen4 extends StatelessWidget {
           SizedBox(height: screenHeight * 0.01),
           Container(
             height: screenHeight * 0.15,
-            child: Obx(() {
-              if (taskController.isLoading.value) {
-                return Center(child: CircularProgressIndicator());
-              } else if (taskController.errorMessage.value.isNotEmpty) {
-                return Center(child: Text(taskController.errorMessage.value));
-              } else {
-                return _buildTaskSection(taskController.tasks, taskController, context);
-              }
-            }),
+            child: GetBuilder<TaskController>(
+              builder: (controller) {
+                if (controller.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.errorMessage.value.isNotEmpty) {
+                  return Center(child: Text(controller.errorMessage.value));
+                } else {
+                  return _buildTaskSection(controller.tasks, controller, context);
+                }
+              },
+            ),
           ),
           SizedBox(height: screenHeight * 0.03),
           CustomButtonLight(
             label: '확인',
             onPressed: () {
-              // 배틀 화면으로 이동
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return MainScreens();
-                },
-              ));
+              // 메인 화면으로 이동
+              Get.to(MainScreens());
             },
           ),
         ],
@@ -125,7 +122,6 @@ class BattleRequestScreen4 extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // 만약 체크 클릭시 체크 표시되도록
             GestureDetector(
               onTap: () {
                 taskController.toggleTask(task);

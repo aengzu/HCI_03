@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:hci_03/models/notification.dart';
 import 'package:hci_03/service/notification_service.dart';
 
+// NOTE: 현재 서버 기능 미구현 상태
 class NotificationController extends GetxController {
   var isLoading = false.obs;
   var notifications = <Notification>[].obs;

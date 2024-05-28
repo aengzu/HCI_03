@@ -21,7 +21,6 @@ class FriendContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
-    double screenHeight = screenSize.height;
 
     return Container(
       decoration: const BoxDecoration(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hci_03/controllers/battle_controller.dart';
 import 'package:hci_03/screens/battle/components/battle_opposite.profile_widget.dart';
 import 'package:hci_03/screens/battle/components/battle_profile_widget.dart';
 import 'package:hci_03/screens/battle/components/missions_widget.dart';
@@ -10,9 +12,11 @@ import '../../constants/image_assets.dart';
 import '../components/appbar_preffered_size.dart';
 
 class BattleScreen extends StatefulWidget {
-  final Battle battle;
+
+  Battle battle;
 
   BattleScreen({required this.battle, super.key});
+
 
   List<Map> missions = [
     {"mission_name": "비타민 먹기 💊", "checked": false},
@@ -30,6 +34,7 @@ class BattleScreen extends StatefulWidget {
 }
 
 class _BattleScreenState extends State<BattleScreen> {
+  final BattleController battleController = Get.put(BattleController());
   void onMissionClick(index) {
     setState(() {
       widget.missions[index]["checked"] = !widget.missions[index]["checked"];
@@ -80,7 +85,7 @@ class _BattleScreenState extends State<BattleScreen> {
                   onClickProfile: onClickProfile,
                 ),
                 BattleOppositeProfileWidget(
-                  opponentName: widget.battle.challenger,
+                  opponentName: battleController.opponentName,
                 ),
               ],
             ),

@@ -12,10 +12,10 @@ class CurrentOpponentBox extends StatelessWidget {
 
   CurrentOpponentBox({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
 
     return Obx(() {
@@ -30,7 +30,7 @@ class CurrentOpponentBox extends StatelessWidget {
             memberNo: 0,
             memberId: battleController.battle.value.challengee,
             password: '',
-            name: battleController.opponentName.value,
+            name: battleController.opponentName,
             deviceKey: '',
           );
         }

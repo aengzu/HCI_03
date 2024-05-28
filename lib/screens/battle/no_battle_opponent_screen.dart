@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants/theme.dart';
 
 class NoBattleOpponentScreen extends StatelessWidget {
@@ -14,6 +13,7 @@ class NoBattleOpponentScreen extends StatelessWidget {
         child: Text(
           message,
           style: textTheme().titleLarge,
+          textAlign: TextAlign.center,
         ),
       ),
     );

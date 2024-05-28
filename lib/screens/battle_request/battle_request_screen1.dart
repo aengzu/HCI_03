@@ -47,7 +47,7 @@ class BattleRequestScreen1 extends StatelessWidget {
             CustomButtonLight(
               label: '대결 상대 신청',
               onPressed: () {
-                Get.to(BattleRequestScreen2(friend: friend));
+                Get.to(() => BattleRequestScreen2(friend: friend));
               },
             ),
           ],

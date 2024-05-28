@@ -17,11 +17,11 @@ class MyPageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserController userController = Get.find<UserController>();
 
-    // Fetching user information from the UserController
+    // 유저 컨트롤러로 정보 페치해옴.
     String name = utf8.decode(userController.user.value.name.codeUnits);
     String id = utf8.decode(userController.user.value.memberId.codeUnits);
-    String bio = "bio"; // Assuming bio is not yet implemented in UserController
-    String profileImage = ImageAssets.receiver; // Assuming profileImage is not yet implemented in UserController
+    String bio = "bio";
+    String profileImage = ImageAssets.receiver;
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +53,7 @@ class MyPageScreen extends StatelessWidget {
 
   Widget _buildProfile(String imageUrl) {
     if (imageUrl.isEmpty) {
-      return CircleAvatar(
+      return const CircleAvatar(
         radius: 55.5,
         backgroundColor: Color(0xffaac0af), // 더미 이미지 색상
         child: Icon(

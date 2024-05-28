@@ -13,11 +13,13 @@ import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:provider/provider.dart';
 import 'package:sizing/sizing.dart';
 import '../../constants/image_assets.dart';
+import '../../controllers/battle_controller.dart';
+import '../../models/battle.dart';
 import 'battle_accept_screen2.dart';
 
 class BattleAcceptScreen1 extends StatelessWidget {
-
-  const BattleAcceptScreen1({super.key});
+  final BattleController battleController = Get.put(BattleController());
+  BattleAcceptScreen1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class BattleAcceptScreen1 extends StatelessWidget {
         children: [
           Image.asset(ImageAssets.receiver, width: 180, height: 180),
           SizedBox(height: 10),
-          Text("친구", style: textTheme().titleMedium),
+          Text(battleController.opponentName, style: textTheme().titleMedium),
           SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.15.sw),

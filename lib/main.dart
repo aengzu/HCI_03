@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hci_03/screens/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:hci_03/screens/splash/splash_screen.dart';
 import 'package:hci_03/screens/main_screens.dart';
@@ -24,7 +25,7 @@ class MiracleApp extends StatelessWidget {
         title: 'HCI03_UI',
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        home: SplashScreen(),
+        home: LoginScreen(),
         initialBinding: BindingsBuilder(() {
           Get.put(UserController());
         }),

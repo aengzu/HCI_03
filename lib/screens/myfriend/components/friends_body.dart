@@ -17,7 +17,6 @@ class FriendsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
@@ -57,10 +56,8 @@ class FriendsBody extends StatelessWidget {
           const Divider(thickness: 0.9, color: Colors.grey),
           Expanded(
             child: Obx(() {
-              if (controller.isLoading.value) {
-                return Center(child: CircularProgressIndicator());
-              } else if (controller.errorMessage.value.isNotEmpty) {
-                return Center(child: Text(" "));
+              if (controller.errorMessage.value.isNotEmpty) {
+                return Center(child: Text("친구 목록을 불러오는 중 오류가 발생했습니다."));
               } else {
                 return ListView.builder(
                   itemCount: controller.friends.length,

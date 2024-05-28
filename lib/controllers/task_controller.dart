@@ -17,11 +17,10 @@ class TaskController extends GetxController {
     fetchAllTasks(); // 초기화 시 모든 디폴트 태스크를 서버에서 가져옴
   }
 
-  // 모든 태스크 가져오기
+  // 모든 디폴트 태스크 가져오기
   Future<void> fetchAllTasks() async {
     isLoading.value = true;
     errorMessage.value = '';
-
     try {
       tasks.value = await taskService.getAllTasks();
     } catch (e) {
@@ -31,7 +30,9 @@ class TaskController extends GetxController {
     }
   }
 
-  // 태스크를 등록하기
+
+
+  // 새로운 태스크를 등록하기
   Future<void> registerTask(String title) async {
     isLoading.value = true;
     errorMessage.value = '';
@@ -69,4 +70,6 @@ class TaskController extends GetxController {
   List<Task> getSelectedTasks() {
     return tasks.where((task) => task.isChecked).toList();
   }
+
+
 }

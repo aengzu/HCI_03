@@ -13,6 +13,8 @@ import 'package:hci_03/constants/image_assets.dart';
 import 'package:sizing/sizing.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
+
+import '../main_screens.dart';
 // NOTE: 대결 신청 완료 UI
 class BattleRequestScreen3 extends StatelessWidget {
   final Friend friend;
@@ -50,7 +52,7 @@ class BattleRequestScreen3 extends StatelessWidget {
               // 버튼 클릭시 최종 태스크 안내 화면으로 이동
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return BattleRequestScreen4();
+                  return MainScreens();
                 },
               ));
             },

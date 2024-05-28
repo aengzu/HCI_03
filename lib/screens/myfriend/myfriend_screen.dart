@@ -12,6 +12,8 @@ class FriendScreen extends StatelessWidget {
   final FriendController friendsController = Get.put(FriendController());
   final UserController userController = Get.find<UserController>();
 
+
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

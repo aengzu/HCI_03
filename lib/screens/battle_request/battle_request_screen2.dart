@@ -69,12 +69,21 @@ class BattleRequestScreen2 extends StatelessWidget {
                 userController.user.value.memberId, // 실제 로그인된 사용자의 ID
                 tasks, // 선택된 태스크들
               );
+              // TODO : 현재 수준에선 배틀 신청 시 이를 상대가 받지 않으면 대결 정보가 보이지 않음
+              // TODO: -> 따라서 배틀 신청 하자마자 수락하도록 코드를 작성하였으나 서버측의 수정으로 수정될 수 있음
+              // var battleNo = battleController.fetchBattle(userController.user.value.memberId);
+              // await battleController.acceptBattle(
+              //   battleNo as int,
+              //   friend.memberId, // 현재 친구의 ID
+              //   userController.user.value.memberId, // 실제 로그인된 사용자의 ID
+              //   tasks, // 선택된 태스크들
+              // );
 
               if (battleController.errorMessage.value.isNotEmpty) {
                 Get.snackbar('Error', battleController.errorMessage.value, snackPosition: SnackPosition.BOTTOM);
               } else {
                 // 대결 신청 완료 화면으로 이동
-                Get.to(BattleRequestScreen3(friend: friend));
+                Get.to(()=>BattleRequestScreen3(friend: friend));
               }
             },
           ),

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:hci_03/controllers/battle_controller.dart';
 import 'package:hci_03/screens/main_screens.dart';
+import 'package:hci_03/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:hci_03/constants/app_url.dart';
 import 'package:hci_03/models/user.dart';
@@ -39,7 +41,7 @@ class LoginController extends GetxController {
         var userJson = jsonDecode(response.body);
         User user = User.fromJson(userJson);
         Get.find<UserController>().setUser(user);
-        Get.to(() => MainScreens());
+        Get.to(() => SplashScreen());
       } else {
         errorMessage.value = 'Failed to login: ${response.statusCode}';
         Get.snackbar('Error', errorMessage.value, snackPosition: SnackPosition.TOP);

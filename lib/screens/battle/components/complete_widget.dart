@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'battle_opposite_profile_widget.dart';
 import 'battle_profile_widget.dart'; // BattleProfileWidget import
-import 'battle_opposite.profile_widget.dart'; // BattleOppositeProfileWidget import
+
 
 class CompleteWidget extends StatelessWidget {
   final bool isProfileClicked;
@@ -59,7 +60,7 @@ class CompleteWidget extends StatelessWidget {
                       percentage: myPercentage,
                       onClickProfile: onClickProfile,
                     ),
-                    BattleOppositeProfileWidget(),
+                    BattleOppositeProfileWidget(opponentName: '',),
                   ],
                 ),
                 const SizedBox(height: 10),

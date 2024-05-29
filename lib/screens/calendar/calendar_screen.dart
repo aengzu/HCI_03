@@ -6,6 +6,7 @@ import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/request_title.dart';
 import 'package:hci_03/screens/battle/components/promise_widget.dart'; // PromiseWidget import
 import 'package:hci_03/screens/calendar/dummy.dart'; // dummy.dart import
+import 'package:hci_03/screens/battle/battle_complete.dart'; // BattleComplete import
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -27,9 +28,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
-    double screenHeight = screenSize.height;
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
@@ -48,15 +46,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: Column(
           children: [
             const PromiseWidget(), // 상단에 PromiseWidget 추가
-            SizedBox(
-              height: screenHeight*0.015,
+            const SizedBox(
+              height: 15.0,
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: TableCalendar(
-                  rowHeight: screenHeight*0.067,
-                  headerStyle: HeaderStyle(headerMargin: EdgeInsets.symmetric(vertical: 10.0),titleCentered: true, titleTextStyle: textTheme().titleSmall!),
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: _focusedDay,
@@ -66,20 +62,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       _selectedDay = selectedDay;
                       _focusedDay = focusedDay;
                     });
+                    if (selectedDay.day == 1 || selectedDay.day == 2 || selectedDay.day == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BattleCompleteScreen(), // BattleCompleteScreen으로 이동
+                        ),
+                      );
+                    }
                   },
                   calendarFormat: CalendarFormat.month, // 월간 보기로 제한
                   availableCalendarFormats: const {
                     CalendarFormat.month: 'Month'
                   },
                   daysOfWeekStyle: DaysOfWeekStyle(
-                    weekdayStyle: textTheme().bodySmall!, // 평일 글꼴 스타일
-                    weekendStyle: textTheme().bodySmall!.copyWith(color: Colors.red), // 주말 글꼴 스타일
+                    weekdayStyle: textTheme().bodySmall ?? TextStyle(fontSize: 12), // 평일 글꼴 스타일
+                    weekendStyle: textTheme().bodySmall?.copyWith(color: Colors.red) ?? TextStyle(fontSize: 12, color: Colors.red), // 주말 글꼴 스타일
                   ),
                   calendarBuilders: CalendarBuilders(
                     defaultBuilder: (context, day, focusedDay) {
                       if (day.isBefore(DateTime.now())) { // 과거 날짜 스타일
                         return Container(
-                          margin: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.all(4.0),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: _getDayColor(day), // 날짜에 따른 색상 지정
@@ -92,7 +96,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         );
                       } else if (isSameDay(day, DateTime.now())) { // 오늘 날짜 스타일
                         return Container(
-                          margin: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.all(4.0),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 2),
@@ -100,7 +104,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           ),
                           child: Text(
                             '${day.day}',
-                            style: textTheme().bodySmall!, // 글씨색 검정색
+                            style: textTheme().bodySmall?.copyWith(color: Colors.black) ?? TextStyle(color: Colors.black), // 글씨색 검정색
                           ),
                         );
                       }

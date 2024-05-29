@@ -53,6 +53,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: TableCalendar(
+                  headerStyle: HeaderStyle(titleCentered: true),
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: _focusedDay,

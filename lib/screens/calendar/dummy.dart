@@ -18,5 +18,19 @@ final Map<DateTime, String> battleResults = {
   DateTime.utc(2024, 5, 14): 'A',
   DateTime.utc(2024, 5, 15): 'A',
   DateTime.utc(2024, 5, 16): 'A',
+  DateTime.utc(2024, 5, 17): 'B',
+  DateTime.utc(2024, 5, 18): 'B',
+  DateTime.utc(2024, 5, 19): 'A',
+  DateTime.utc(2024, 5, 20): 'A',
+  DateTime.utc(2024, 5, 21): 'A',
+  DateTime.utc(2024, 5, 22): 'A',
+  DateTime.utc(2024, 5, 23): 'B',
+  DateTime.utc(2024, 5, 24): 'B',
+  DateTime.utc(2024, 5, 25): 'A',
+  DateTime.utc(2024, 5, 26): 'B',
+  DateTime.utc(2024, 5, 27): 'A',
+  DateTime.utc(2024, 5, 28): 'B',
+  DateTime.utc(2024, 5, 29): 'A',
+
   // 다른 날짜와 결과를 여기에 추가하세요.
 };

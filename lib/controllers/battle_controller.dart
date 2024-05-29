@@ -286,4 +286,36 @@ class BattleController extends GetxController {
       isLoading.value = false;
     }
   }
+
+
+  // 태스크를 그룹화하여 같은 태스크를 한 줄에 표시하기 위한 리스트 생성
+  List<Map<String, dynamic>> getGroupedMissions(String userId) {
+    Map<String, Map<String, dynamic>> groupedMissions = {};
+    for (var task in battle.value.battleTasks) {
+      // 만약 task 의 memberNo 가 상대일 때의 처리
+      if (task.memberNo != userId) {
+         continue;
+      }
+
+      // TODO : 서버와 태스크 연동 후 task 의 memberNo 가 나일 때의 처리해야함
+
+      print(battle.value.battleTasks[0].toJson());
+      String taskName = task.task.taskName;
+      bool isMine = task.memberNo == userId;
+      bool check = task.check;
+
+      if (!groupedMissions.containsKey(taskName)) {
+        groupedMissions[taskName] = {
+          "taskName": taskName,
+          "myCheck": isMine ? check : null,
+          "opponentCheck": !isMine ? check : null,
+          "battleNo": task.battleTaskNo, // int 타입 유지
+          "taskNo": task.task.taskNo,    // int 타입 유지
+        };
+      } else {
+          groupedMissions[taskName]!["myCheck"] = check;
+      }
+    }
+    return groupedMissions.values.toList();
+  }
 }

@@ -23,30 +23,8 @@ class BattleScreen extends StatelessWidget {
     final userId = battleController.userController.user.value.memberId;
 
     // 태스크를 그룹화하여 같은 태스크를 한 줄에 표시하기 위한 리스트 생성
-    Map<String, Map<String, dynamic>> groupedMissions = {};
-    for (var task in battle.battleTasks) {
-      String taskName = task.task.taskName;
-      bool isMine = task.memberNo == userId;
-      bool check = task.check;
+    List<Map<String, dynamic>> missions = battleController.getGroupedMissions(userId);
 
-      if (!groupedMissions.containsKey(taskName)) {
-        groupedMissions[taskName] = {
-          "taskName": taskName,
-          "myCheck": isMine ? check : null,
-          "opponentCheck": !isMine ? check : null,
-          "battleNo": task.battleTaskNo, // int 타입 유지
-          "taskNo": task.task.taskNo,    // int 타입 유지
-        };
-      } else {
-        if (isMine) {
-          groupedMissions[taskName]!["myCheck"] = check;
-        } else {
-          groupedMissions[taskName]!["opponentCheck"] = check;
-        }
-      }
-    }
-
-    List<Map<String, dynamic>> missions = groupedMissions.values.toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -88,7 +66,7 @@ class BattleScreen extends StatelessWidget {
                   return MissionsWidget(
                     mission: missions[index],
                     onMissionClick: (idx) {
-                      // 여기서 팝업을 띄우는 로직을 추가하세요.
+                      // 팝업 띄움
                       battleController.onClickCertification(context, missions[idx]['taskName'], missions[idx]['battleNo'], missions[idx]['taskNo']);
                     },
                     index: index,

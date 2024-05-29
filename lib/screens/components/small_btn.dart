@@ -4,7 +4,7 @@ import '../../constants/theme.dart';
 
 class SmallButton extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const SmallButton({Key? key, required this.label, required this.onPressed})
       : super(key: key);

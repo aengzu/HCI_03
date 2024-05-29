@@ -1,62 +1,83 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/models/task.dart';
+import 'package:hci_03/service/task_service.dart';
 
-class TaskController with ChangeNotifier {
-  // Dummy tasks for demonstration purposes
-  List<Task> defualtTasks = [
-    Task(title: "비타민 먹기", emoji: "💊"),
-    Task(title: "아침 식사하기", emoji: "🍳"),
-    Task(title: "선크림 바르기", emoji: "🌞"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "체육관 가기", emoji: "🏋️"),
-    Task(title: "러닝 20분 하기", emoji: "🏃"),
-  ];
+class TaskController extends GetxController {
+  var isLoading = false.obs;
+  var tasks = <Task>[].obs;
+  var errorMessage = ''.obs;
 
-  List<Task> bothSelectedTasks = [
-    Task(title: "비타민 먹기", emoji: "💊", isChecked: true),
-    Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
-    Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
-    Task(title: "아침 식사하기", emoji: "🍳", isChecked: true),
-    Task(title: "선크림 바르기", emoji: "🌞", isChecked: true),
-  ];
+  final TaskService taskService = TaskService();
 
-  List<Task> opponentSelectedTasks = [
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-    Task(title: "도서관 가기", emoji: "📚"),
-    Task(title: "러닝 30분 하기", emoji: "🏃"),
-  ];
-
-  List<Task> getBothSelectedTasks() {
-    return bothSelectedTasks;
+  @override
+  void onInit() {
+    super.onInit();
+    fetchAllTasks(); // 초기화 시 모든 디폴트 태스크를 서버에서 가져옴
   }
 
-  List<Task> getOpponentSelectedTasks() {
-    return opponentSelectedTasks;
-  }
-
-  void toggleTask(Task task) {
-    // task 의 체크 여부를 변경하게 됨.
-    task.isChecked = !task.isChecked;
-    notifyListeners();
-  }
-
-  void addTask(String title, String emoji) {
-    if (title.isNotEmpty) { // addTask 를 하면 defalutTask 더미데이터에 일단 추가됩니다.
-      defualtTasks.add(Task(title: title, emoji: emoji));
-      notifyListeners();
+  // 모든 디폴트 태스크 가져오기
+  Future<void> fetchAllTasks() async {
+    isLoading.value = true;
+    errorMessage.value = '';
+    try {
+      tasks.value = await taskService.getAllTasks();
+    } catch (e) {
+      errorMessage.value = 'Failed to load tasks: $e';
+    } finally {
+      isLoading.value = false;
     }
   }
 
-  void saveTasks() {
-    List<Task> selectedTasks = [
-      ...bothSelectedTasks.where((task) => task.isChecked),
-      ...opponentSelectedTasks.where((task) => task.isChecked),
-    ];
-    // 테스트를 위해 출력
-    selectedTasks.forEach((task) => print('Selected Task: ${task.title}'));
+  // 새로운 태스크를 등록하기
+  Future<void> registerTask(String title) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      await taskService.registerTask(title);
+      await fetchAllTasks(); // 새로 태스크를 등록한 후 태스크 목록을 새로고침
+    } catch (e) {
+      errorMessage.value = 'Failed to register task: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> searchTasks(String taskName) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      tasks.value = await taskService.getTasksByName(taskName);
+    } catch (e) {
+      errorMessage.value = 'Failed to search tasks: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // 태스크 넘버로 태스크 가져오기
+  Future<void> getTasksByNumbers(List<int> taskNumbers) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      tasks.value = await taskService.getTasksByNumbers(taskNumbers);
+    } catch (e) {
+      errorMessage.value = 'Failed to load tasks: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // 태스크 체크 표시
+  void toggleTask(Task task) {
+    task.isChecked = !task.isChecked;
+    tasks.refresh(); // UI 갱신을 위해 옵저버블 리스트를 새로 고침
+  }
+
+  // 선택된 태스크 가져오기
+  List<Task> getSelectedTasks() {
+    return tasks.where((task) => task.isChecked).toList();
   }
 }

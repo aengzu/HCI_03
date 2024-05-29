@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle/spur_on_screen.dart';
-import 'package:hci_03/screens/components/small_btn.dart';
-import 'package:provider/provider.dart';
 
-import '../../../opponent_provider.dart';
+import '../../../controllers/battle_controller.dart';
 
 class BattleOppositeProfileWidget extends StatelessWidget {
-  const BattleOppositeProfileWidget({super.key});
+  final String opponentName;
+  final BattleController battleController = Get.find<BattleController>();
+
+  BattleOppositeProfileWidget({required this.opponentName, super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Provider를 사용하여 currentOpponent 가져오기
-    final currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
-
     return Column(
       children: [
         Text(
-          currentOpponent?.name ?? '길동이',
+          opponentName.isNotEmpty ? opponentName : '없음',
           style: textTheme().titleMedium,
         ),
         const SizedBox(
           height: 5.0,
         ),
         Image.asset(
-          'assets/images/sender_img.png',
+          battleController.getOpponentProfileImage(),
           width: 120,
           height: 120,
         ),
@@ -36,7 +34,7 @@ class BattleOppositeProfileWidget extends StatelessWidget {
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return SpurOnScreen();
+                return SpurOnScreen(opponentName: opponentName);
               },
             ));
           },

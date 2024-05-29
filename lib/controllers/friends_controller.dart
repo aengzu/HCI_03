@@ -1,20 +1,42 @@
-import 'package:hci_03/constants/image_assets.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/models/friend.dart';
+import 'package:hci_03/models/friend_dto.dart';
+import 'package:hci_03/service/friend_service.dart';
 
-class FriendsController {
-  List<Friend> friends = [ // dummyFirneds
-    Friend(id: "jyj", name: "전영주", profileImage: ImageAssets.sender, bio: "안녕하세요. 저는 전영주입니다. 저는 현재 토익을 공부하고 있습니다. 토익 850점이 목표입니다."),
-    Friend(id: "kss", name: "김성수", profileImage: ImageAssets.sender, bio: "반가워요"),
-    Friend(id: "kbj", name: "김병주", profileImage: ImageAssets.sender, bio: "같이 힘내봐요."),
-    Friend(id: "jy", name: "장영", profileImage: ImageAssets.sender, bio: "아자아자"),
-    Friend(id: "pjl", name: "박정록", profileImage: ImageAssets.sender, bio: "HCI 파이팅"),
+// NOTE: 친구 목록을 가져오고 추가하기 위한 컨트롤러 입니다.
+class FriendController extends GetxController {
+  var isLoading = false.obs;
+  var friends = <FriendResponse>[].obs;
+  var errorMessage = ''.obs;
 
-  ];
+  final FriendService friendService = FriendService();
 
-  void addFriend(String id, String name) {
-    friends.add(Friend(id: id, name: name, profileImage: ImageAssets.sender, bio: "No bio"));
+  Future<void> registerFriend(String friendId, String memberId) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      // 내 아이디와 친구 아이디로 FriendDto 를 보냅니다.
+      FriendDto friendDto = FriendDto(friendId: friendId, memberId: memberId);
+      await friendService.registerFriend(friendDto);
+      await fetchFriends(memberId); // 친구 추가 후 친구 목록 새로고침
+    } catch (e) {
+      errorMessage.value = '친구 등록 실패: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchFriends(String memberId) async {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    try {
+      friends.value = await friendService.getFriends(memberId);
+    } catch (e) {
+      errorMessage.value = '친구가 없습니다. : $e';
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
-
-Friend? currentOpponent;
-

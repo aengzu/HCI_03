@@ -11,16 +11,15 @@ import 'custom_dialog.dart'; // 커스텀 다이얼로그 파일 임포트
 import 'friends_body.dart';
 
 class FriendsHeader extends StatelessWidget {
-  final FriendsController controller;
 
-  const FriendsHeader({super.key, required this.controller});
+  const FriendsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.zero,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16), // 상하 20, 좌우 16 패딩
+        padding: EdgeInsets.only(top: 20, left: 16, right: 16.0), // 상하 20, 좌우 16 패딩
         child: Stack(
           children: [
             // 가운데 위치한 텍스트 타이틀

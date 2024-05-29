@@ -1,92 +1,205 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:hci_03/controllers/auth_controller/signup_controller.dart';
-import 'package:hci_03/screens/components/custom_btn.dart';
+import 'package:hci_03/constants/image_assets.dart';
+import 'package:image_picker/image_picker.dart';
 
+class MissionsWidget extends StatelessWidget {
+  final Map mission;
+  final Function(int) onMissionClick;
+  final int index;
 
+  const MissionsWidget(
+      {super.key,
+        required this.mission,
+        required this.onMissionClick,
+        required this.index});
 
-class SignUpScreen extends StatelessWidget {
-  final SignUpController signUpController = Get.put(SignUpController());
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
-    return Scaffold(
-      appBar: AppBar(title: Text("회원가입")),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
+  void onClickCertification(BuildContext context, String missionText) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Stack(
           children: [
-            _buildTextField(
-              controller: usernameController,
-              labelText: '사용자 이름',
-              hintText: '사용자 이름을 입력하세요.',
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                color: Colors.black.withOpacity(0.5),
+              ),
             ),
-            SizedBox(height: 20),
-            _buildTextField(
-              controller: emailController,
-              labelText: '이메일',
-              hintText: '이메일을 입력하세요.',
-            ),
-            SizedBox(height: 20),
-            _buildTextField(
-              controller: passwordController,
-              labelText: '비밀번호',
-              hintText: '비밀번호를 입력하세요.',
-              isObscure: true,
-            ),
-
-            SizedBox(height: 40),
-            CustomButton(
-              label: '회원가입하기',
-              onPressed: () async {
-                await signUpController.signUp(
-                    usernameController.text,
-                    emailController.text,
-                    passwordController.text
-                );
-              },
-            ),
+            Center(
+              child: Container(
+                height: 600,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 60.0, vertical: 20.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image.asset(
+                            'assets/images/receiver_img.png',
+                            width: 130,
+                            height: 130,
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            missionText,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ElevatedButton(
+                            // TODO : 카메라 연동 기능 추가하기
+                            onPressed: () async {
+                              final ImagePicker picker = ImagePicker();
+                              final XFile? image = await picker.pickImage(
+                                  source: ImageSource.camera);
+                              if (image != null) {
+                                // TODO: 이미지 업로드 로직 추가
+                                print("Image Path: ${image.path}");
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30.0, vertical: 12.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  color: const Color(0xff4c4c4c),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(0xffbcb7b7)
+                                          .withOpacity(0.25),
+                                      offset: const Offset(0, 1),
+                                    )
+                                  ]),
+                              child: Text('(인증 사진 첨부)',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Flexible(
+                      flex: 4,
+                      child: SizedBox(),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // 인증 전송 로직
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xff4cd663),
+                        ),
+                        child: Text(
+                          '인증전송',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String labelText,
-    required String hintText,
-    bool isObscure = false,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // 라벨과 텍스트 필드를 왼쪽 정렬합니다.
-      children: [
-        Text(
-          labelText,
-          style: const TextStyle(
-            fontSize: 16, // 적절한 폰트 사이즈로 조정
-            fontWeight: FontWeight.bold, // 라벨에 볼드 스타일 적용
-            color: Colors.black54, // 라벨 색상 조정
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 3.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      onMissionClick(index);
+                      onClickCertification(context, mission["mission_name"]);
+                    },
+                    child: mission["checked"]
+                        ? Image.asset(
+                      ImageAssets.checkedOwn,
+                      width: 24,
+                      height: 24,
+                    )
+                        : Image.asset(
+                      ImageAssets.uncheckedOwn,
+                      width: 24,
+                      height: 24,
+                    )),
+                IntrinsicWidth(
+                  child: Text(mission["mission_name"],
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontWeight: FontWeight.w500)),
+                ),
+                Image.asset(ImageAssets.uncheckedOpposite),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 8), // 라벨과 텍스트 필드 사이의 간격 조정
-        TextField(
-          controller: controller,
-          obscureText: isObscure,
-          decoration: InputDecoration(
-            hintText: hintText,
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 10.0, horizontal: 10.0),
-            border: OutlineInputBorder(),
-          ),
-        ),
-      ],
+          Flexible(
+            // 상대방의 인증 여부에 따라 visible/invisible and 상대가 사진 업로드 완료 시 상태 변경
+            flex: 1,
+            child: GestureDetector(
+              child: Container(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: const Color(0xffbcb7b7).withOpacity(0.25),
+                ),
+                child: Text(
+                  '인증',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontSize: 12),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

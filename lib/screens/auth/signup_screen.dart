@@ -5,19 +5,11 @@ import 'package:hci_03/controllers/auth_controller/signup_controller.dart';
 import 'package:hci_03/screens/components/custom_btn.dart';
 import 'package:sizing/sizing.dart';
 
-
-
 class SignUpScreen extends StatelessWidget {
   final SignUpController signUpController = Get.put(SignUpController());
 
-
-
   @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -25,41 +17,62 @@ class SignUpScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          children: [
-            _buildTextField(
-              controller: emailController,
-              labelText: '이메일',
-              hintText: '이메일을 입력하세요.',
-            ),
-            SizedBox(height: 0.03.sh),
-            _buildTextField(
-              controller: usernameController,
-              labelText: '사용자 이름',
-              hintText: '사용자 이름을 입력하세요.',
-            ),
-            SizedBox(height: 0.03.sh),
-            _buildTextField(
-              controller: passwordController,
-              labelText: '비밀번호',
-              hintText: '비밀번호를 입력하세요.',
-              isObscure: true,
-            ),
-            SizedBox(height: 0.2.sh),
-            CustomButton(
-              label: '회원가입하기',
-              onPressed: () async {
-                await signUpController.signUp(
-                  usernameController.text,
-                  emailController.text,
-                  passwordController.text
-                );
-              },
-            ),
-          ],
-        ),
+        child: Obx(() {
+          if (!signUpController.isDeviceKeyLoaded.value) {
+            return Center(child: CircularProgressIndicator());
+          } else if (signUpController.errorMessage.value.isNotEmpty) {
+            return Center(child: Text('Error: ${signUpController.errorMessage.value}'));
+          } else {
+            return ListView(
+              children: [
+                _buildTextField(
+                  controller: signUpController.memberIdController,
+                  labelText: '사용자 ID',
+                  hintText: '사용자 ID를 입력하세요.',
+                ),
+                SizedBox(height: 0.03.sh),
+                _buildTextField(
+                  controller: signUpController.nameController,
+                  labelText: '사용자 이름',
+                  hintText: '사용자 이름을 입력하세요.',
+                ),
+                SizedBox(height: 0.03.sh),
+                _buildTextField(
+                  controller: signUpController.passwordController,
+                  labelText: '비밀번호',
+                  hintText: '비밀번호를 입력하세요.',
+                  isObscure: true,
+                ),
+                SizedBox(height: 0.2.sh),
+                CustomButton(
+                  label: signUpController.isLoading.value ? '회원가입 중...' : '회원가입하기',
+                  onPressed: signUpController.isLoading.value
+                      ? null
+                      : () {
+                    _signUp();
+                  },
+                ),
+              ],
+            );
+          }
+        }),
       ),
     );
+  }
+
+  Future<void> _signUp() async {
+    await signUpController.signUp(
+      signUpController.memberIdController.text,
+      signUpController.nameController.text,
+      signUpController.passwordController.text,
+    );
+    if (signUpController.errorMessage.value.isNotEmpty) {
+      Get.snackbar('Error', signUpController.errorMessage.value,
+          snackPosition: SnackPosition.TOP);
+    } else {
+      Get.snackbar('Success', '회원가입이 성공적으로 완료되었습니다.',
+          snackPosition: SnackPosition.TOP);
+    }
   }
 
   Widget _buildTextField({
@@ -82,8 +95,8 @@ class SignUpScreen extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: textTheme().bodyMedium,
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 10.0, horizontal: 10.0),
+            contentPadding:
+            EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             border: OutlineInputBorder(),
           ),
         ),

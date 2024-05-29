@@ -11,10 +11,9 @@ import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/components/notice_box.dart';
 import 'package:hci_03/constants/image_assets.dart';
 import 'package:sizing/sizing.dart';
-import '../../opponent_provider.dart';
 import '../components/appbar_preffered_size.dart';
 import 'package:hci_03/models/friend.dart';
-// NOTE: 대결 신청 완료 UI
+
 class FriendDetailScreen extends StatelessWidget {
   const FriendDetailScreen({super.key});
 
@@ -23,9 +22,6 @@ class FriendDetailScreen extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-    // NOTE: Provider 를 통해 현재 대결 상대에 접근
-    Friend? currentOpponent = Provider.of<OpponentProvider>(context).currentOpponent;
-
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(ImageAssets.logo, width: 100),
@@ -39,7 +35,7 @@ class FriendDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: screenHeight*0.03),
-          _buildProfile(currentOpponent),
+         // _buildProfile(currentOpponent),
           SizedBox(height: screenHeight*0.04),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
@@ -81,13 +77,13 @@ class FriendDetailScreen extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Text(opponent.name, style: textTheme().titleMedium),
+          Text("길동", style: textTheme().titleMedium),
           SizedBox(height: 0.015.sh),
-          Image.asset(opponent.profileImage, width: 180, height: 180),
+          Image.asset(ImageAssets.receiver, width: 180, height: 180),
           SizedBox(height: 0.01.sh),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.15.sw),
-            child: Text(opponent.bio, style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
+            child: Text("안녕", style: textTheme().bodyMedium, maxLines: 2, overflow: TextOverflow.ellipsis),
           ),
         ],
       ),

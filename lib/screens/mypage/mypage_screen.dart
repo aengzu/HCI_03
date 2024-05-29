@@ -1,22 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:hci_03/models/friend.dart';
-import 'package:hci_03/opponent_provider.dart';
+import 'package:get/get.dart';
+import 'package:sizing/sizing.dart';
+import 'package:hci_03/constants/image_assets.dart';
+import 'package:hci_03/constants/theme.dart';
+import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/mypage/components/achievements_section.dart';
 import 'package:hci_03/screens/mypage/components/profile_section.dart';
-import 'package:provider/provider.dart';
-import 'package:sizing/sizing.dart';
-import '../../constants/image_assets.dart';
+import '../../controllers/battle_controller.dart';
 import '../components/appbar_preffered_size.dart';
 
 class MyPageScreen extends StatelessWidget {
-  const MyPageScreen({super.key});
+  final BattleController battleController = Get.find<BattleController>();
+  MyPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.find<UserController>();
 
-    String name = "나";
-    String bio = "열심히 하자!";
-    String profileImage = ImageAssets.receiver;
+    // 유저 컨트롤러로 정보 페치해옴.
+    String name = utf8.decode(userController.user.value.name.codeUnits);
+    String id = utf8.decode(userController.user.value.memberId.codeUnits);
+    String bio = "bio";
+    String profileImage = battleController.getProfileImage();
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +41,7 @@ class MyPageScreen extends StatelessWidget {
         children: [
           SizedBox(height: 0.05.sh),
           _buildProfile(profileImage),
+          Text(id, style: textTheme().titleMedium),
           SizedBox(height: 0.02.sh),
           ProfileSection(title: "이름", content: name),
           SizedBox(height: 0.05.sh),
@@ -47,7 +55,7 @@ class MyPageScreen extends StatelessWidget {
 
   Widget _buildProfile(String imageUrl) {
     if (imageUrl.isEmpty) {
-      return CircleAvatar(
+      return const CircleAvatar(
         radius: 55.5,
         backgroundColor: Color(0xffaac0af), // 더미 이미지 색상
         child: Icon(

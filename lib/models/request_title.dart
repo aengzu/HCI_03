@@ -26,4 +26,12 @@ List<Notice> dummyNotices = [
     title: '이번달 공약',
     description: '지는 사람이 베스타 사기☺️',
   ),
+  Notice(
+    title: '☑️ 도전장 수락하기',
+    description: '상대방의 도전에 응하시겠습니까?️',
+  ),
+  Notice(
+    title: '☑️ 목표 정하기',
+    description: '친구와 함께 이루어나갈 공동의 목표를 정해봐요!',
+  ),
 ];

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/myfriend/components/friends_header.dart';
 import '../../constants/image_assets.dart';
+import '../../controllers/battle_controller.dart';
 import '../../controllers/friends_controller.dart';
 import '../components/appbar_preffered_size.dart';
 import 'components/friends_body.dart';
@@ -14,11 +15,9 @@ class FriendScreen extends StatelessWidget {
 
 
 
+
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
-    double screenHeight = screenSize.height;
 
     // 로그인된 사용자의 아이디를 사용하여 친구 목록을 가져옵니다.
     friendsController.fetchFriends(userController.user.value.memberId);

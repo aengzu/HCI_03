@@ -6,7 +6,7 @@ class BattleTask {
   final String? image;
   final Task task;
   final String memberNo;
-  final bool check;
+  bool check = false;
   final bool auth;
 
   BattleTask({

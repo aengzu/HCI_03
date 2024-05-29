@@ -69,14 +69,13 @@ class BattleAcceptScreen2 extends StatelessWidget {
             onPressed: () async {
               // 선택된 태스크들을 가져옴
               List<Task> selectedTasks = taskController.getSelectedTasks();
+              String taskNos = selectedTasks.map((task) => task.taskNo.toString()).join(',');
 
-              // 버튼 클릭시 대결 신청
-
-              if (battleController.errorMessage.value.isNotEmpty) {
-                Get.snackbar('Error', battleController.errorMessage.value, snackPosition: SnackPosition.BOTTOM);
-              } else {
-                // 현재 메인으로 이동 만약 상대가 수락하면 화면 변경됨
+              try {
+                await battleController.acceptBattle(taskNos);
                 Get.to(MainScreens());
+              } catch (e) {
+                Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
               }
             },
           ),

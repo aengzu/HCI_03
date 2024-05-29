@@ -8,6 +8,8 @@ import 'package:hci_03/screens/mypage/mypage_screen.dart';
 import 'package:hci_03/screens/battle/no_battle_opponent_screen.dart';
 import '../controllers/battle_controller.dart';
 import '../controllers/user_controller.dart';
+import 'battle_accept/battle_accept_screen1.dart';
+
 
 class MainScreens extends StatefulWidget {
   MainScreens({super.key});
@@ -24,6 +26,7 @@ class _MainScreensState extends State<MainScreens> {
   @override
   void initState() {
     super.initState();
+    battleController.fetchBattle(userController.user.value.memberId);
   }
 
   @override
@@ -79,8 +82,14 @@ class _MainScreensState extends State<MainScreens> {
 
   Widget _getBattleScreen() {
     var battle = battleController.battle.value;
+    var memberId = userController.user.value.memberId;
+
     if (battle.battleNo > 0) {
-      return BattleScreen(battle: battle);
+      if (battle.challengee == memberId && !battle.accept) {
+        return BattleAcceptScreen1();
+      } else {
+        return BattleScreen(battle: battle);
+      }
     } else {
       return NoBattleOpponentScreen(message: "현재 대결 상대가 없습니다.");
     }

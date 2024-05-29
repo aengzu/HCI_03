@@ -50,7 +50,7 @@ class BattleAcceptScreen1 extends StatelessWidget {
 
             SizedBox(height: screenHeight * 0.05),
             CustomButtonLight(
-              label: '대결 상대 신청',
+              label: '수락하기',
               onPressed: () {
                 Get.to(BattleAcceptScreen2());
               },

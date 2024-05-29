@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/battle/spur_on_screen.dart';
 
+import '../../../controllers/battle_controller.dart';
+
 class BattleOppositeProfileWidget extends StatelessWidget {
   final String opponentName;
+  final BattleController battleController = Get.find<BattleController>();
 
-  const BattleOppositeProfileWidget({required this.opponentName, super.key});
+  BattleOppositeProfileWidget({required this.opponentName, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class BattleOppositeProfileWidget extends StatelessWidget {
           height: 5.0,
         ),
         Image.asset(
-          'assets/images/sender_img.png',
+          battleController.getOpponentProfileImage(),
           width: 120,
           height: 120,
         ),

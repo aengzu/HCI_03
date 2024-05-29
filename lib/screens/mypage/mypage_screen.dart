@@ -8,10 +8,12 @@ import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/controllers/user_controller.dart';
 import 'package:hci_03/screens/mypage/components/achievements_section.dart';
 import 'package:hci_03/screens/mypage/components/profile_section.dart';
+import '../../controllers/battle_controller.dart';
 import '../components/appbar_preffered_size.dart';
 
 class MyPageScreen extends StatelessWidget {
-  const MyPageScreen({super.key});
+  final BattleController battleController = Get.find<BattleController>();
+  MyPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class MyPageScreen extends StatelessWidget {
     String name = utf8.decode(userController.user.value.name.codeUnits);
     String id = utf8.decode(userController.user.value.memberId.codeUnits);
     String bio = "bio";
-    String profileImage = ImageAssets.receiver;
+    String profileImage = battleController.getProfileImage();
 
     return Scaffold(
       appBar: AppBar(

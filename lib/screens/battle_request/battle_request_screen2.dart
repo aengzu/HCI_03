@@ -61,7 +61,7 @@ class BattleRequestScreen2 extends StatelessWidget {
             onPressed: () async {
               // 선택된 태스크들을 가져옴
               List<Task> selectedTasks = taskController.getSelectedTasks();
-              String tasks = selectedTasks.map((task) => task.taskName).join(', ');
+              String tasks = selectedTasks.map((task) => task.taskNo.toString()).join(', ');
 
               // 버튼 클릭시 대결 신청 요청을 보냄
               await battleController.registerBattle(

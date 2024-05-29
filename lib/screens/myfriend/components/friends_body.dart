@@ -7,9 +7,12 @@ import 'package:hci_03/screens/myfriend/components/current_opponent_box.dart';
 import 'package:hci_03/screens/myfriend/components/custom_dialog.dart';
 import 'package:hci_03/screens/myfriend/components/friend_container.dart';
 
+import '../../../controllers/battle_controller.dart';
+
 class FriendsBody extends StatelessWidget {
   final FriendController controller;
   final UserController userController = Get.find<UserController>();
+
 
   FriendsBody({super.key, required this.controller});
 
@@ -57,7 +60,7 @@ class FriendsBody extends StatelessWidget {
           Expanded(
             child: Obx(() {
               if (controller.errorMessage.value.isNotEmpty) {
-                return Center(child: Text("친구 목록을 불러오는 중 오류가 발생했습니다."));
+                return Center(child: Text("친구가 없습니다."));
               } else {
                 return ListView.builder(
                   itemCount: controller.friends.length,

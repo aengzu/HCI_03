@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:hci_03/models/user.dart';
+import 'package:hci_03/screens/auth/login_screen.dart';
 import 'package:hci_03/screens/main_screens.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -68,7 +69,7 @@ class SignUpController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         // Signup successful
-        Get.to(MainScreens());
+        Get.to(LoginScreen());
 
       } else {
         errorMessage.value = 'Failed to sign up: ${response.statusCode}';

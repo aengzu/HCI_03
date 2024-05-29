@@ -1,15 +1,19 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/constants/image_assets.dart';
 import 'package:hci_03/constants/theme.dart';
 
+import '../../../controllers/battle_controller.dart';
+
 class BattleProfileWidget extends StatelessWidget {
+  final BattleController battleController = Get.find<BattleController>();
   final bool isProfileClicked;
   final double percentage;
   final Function onClickProfile;
 
-  const BattleProfileWidget(
+  BattleProfileWidget(
       {super.key,
       required this.isProfileClicked,
       required this.percentage,
@@ -79,7 +83,7 @@ class BattleProfileWidget extends StatelessWidget {
           child: isProfileClicked
               ? pieChart(percentage, context)
               : Image.asset(
-                  ImageAssets.receiver,
+                  battleController.getProfileImage(),
                   width: 120,
                   height: 120,
                 ),

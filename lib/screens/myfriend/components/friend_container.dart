@@ -34,7 +34,7 @@ class FriendContainer extends StatelessWidget {
         padding: const EdgeInsets.all(10), // 모든 측면에 10의 패딩 적용
         child: Row(
           children: [
-            Image.asset(ImageAssets.receiver, width: 80, height: 80),
+            Image.asset(battleController.getOpponentProfileImage(), width: 80, height: 80),
             SizedBox(width: screenWidth * 0.035), // 이미지와 텍스트 사이의 간격 설정
             Expanded(
               child: Text(

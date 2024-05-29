@@ -3,7 +3,6 @@ import 'package:hci_03/constants/app_url.dart';
 import 'package:hci_03/models/task.dart';
 import 'package:http/http.dart' as http;
 
-// NOTE: 디폴트 태스크들을 가져오기 위해 서버와 직접적으로 소통하는 부분입니다.
 class TaskService {
   final String baseUrl = AppUrl.baseUrl;
 
@@ -42,6 +41,18 @@ class TaskService {
       return body.map((dynamic item) => Task.fromJson(item)).toList();
     } else {
       throw Exception('Failed to search tasks');
+    }
+  }
+
+  Future<List<Task>> getTasksByNumbers(List<int> taskNumbers) async {
+    String taskQuery = taskNumbers.join(',');
+    final response = await http.get(Uri.parse('$baseUrl/api/tasks?task=$taskQuery'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = json.decode(utf8.decode(response.bodyBytes));
+      return body.map((dynamic item) => Task.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load tasks by number');
     }
   }
 }

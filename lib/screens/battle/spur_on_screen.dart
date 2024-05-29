@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hci_03/constants/theme.dart';
 import 'package:hci_03/screens/components/appbar_preffered_size.dart';
 import 'package:hci_03/screens/components/custom_light_btn.dart';
 import 'package:hci_03/screens/battle/components/commentWidget.dart';
 import 'package:hci_03/screens/battle/components/input_spur_comment_widget.dart';
 import 'package:hci_03/screens/battle/components/spur_on_top_bar_widget.dart';
+
+import '../../controllers/battle_controller.dart';
 
 class SpurOnScreen extends StatefulWidget {
   final String opponentName;
@@ -23,6 +26,7 @@ class SpurOnScreen extends StatefulWidget {
 }
 
 class _SpurOnScreenState extends State<SpurOnScreen> {
+  final BattleController battleController = Get.find<BattleController>();
   Widget targetProfile() {
     return Column(children: [
       Text(
@@ -33,7 +37,7 @@ class _SpurOnScreenState extends State<SpurOnScreen> {
         height: 5.0,
       ),
       Image.asset(
-        'assets/images/sender_img.png',
+        battleController.getOpponentProfileImage(),
         width: 80,
         height: 80,
       )

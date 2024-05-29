@@ -9,9 +9,9 @@ import 'package:hci_03/controllers/user_controller.dart';
 class CurrentOpponentBox extends StatelessWidget {
   final BattleController battleController = Get.find<BattleController>();
   final UserController userController = Get.find<UserController>();
+  Friend? currentOpponent;
 
   CurrentOpponentBox({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,9 @@ class CurrentOpponentBox extends StatelessWidget {
       } else if (battleController.errorMessage.value.isNotEmpty) {
         return _buildNoOpponentMessage(context);
       } else {
-        Friend? currentOpponent;
-        if (battleController.battle.value.challengee.isNotEmpty) {
+        if (battleController.battle.value.battleNo > 0) {
           currentOpponent = Friend(
-            memberNo: 0,
-            memberId: battleController.battle.value.challengee,
-            password: '',
-            name: battleController.opponentName,
-            deviceKey: '',
+              memberNo: 0, memberId: battleController.opponentId, password: '', name: battleController.opponentName, deviceKey: ''
           );
         }
 
@@ -44,7 +39,7 @@ class CurrentOpponentBox extends StatelessWidget {
               const Divider(thickness: 0.9, color: Colors.grey),
               currentOpponent == null
                   ? _buildNoOpponentMessage(context)
-                  : FriendContainer(friend: currentOpponent),
+                  : FriendContainer(friend: currentOpponent!),
               SizedBox(height: screenHeight * 0.1),
             ],
           ),
@@ -55,7 +50,6 @@ class CurrentOpponentBox extends StatelessWidget {
 
   Widget _buildNoOpponentMessage(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
     return Column(
       children: [

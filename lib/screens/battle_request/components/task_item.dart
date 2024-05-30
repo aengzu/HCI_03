@@ -15,7 +15,6 @@ class TaskItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
         alignment: Alignment.center,
         width: screenWidth * 0.8,
         height: screenHeight * 0.08, // Fixed height

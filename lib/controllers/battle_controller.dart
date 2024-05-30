@@ -292,12 +292,10 @@ class BattleController extends GetxController {
   List<Map<String, dynamic>> getGroupedMissions(String userId) {
     Map<String, Map<String, dynamic>> groupedMissions = {};
     for (var task in battle.value.battleTasks) {
-      // 만약 task 의 memberNo 가 상대일 때의 처리
+      // TODO: 만약 task 의 memberNo 가 상대일 때의 처리 -> 우선은 X
       if (task.memberNo != userId) {
          continue;
       }
-
-      // TODO : 서버와 태스크 연동 후 task 의 memberNo 가 나일 때의 처리해야함
 
       print(battle.value.battleTasks[0].toJson());
       String taskName = task.task.taskName;

@@ -19,19 +19,17 @@ class TaskService {
 
   Future<void> registerTask(String title) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/api/task/register'),
+      Uri.parse('$baseUrl/api/task/register?title=$title'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        'title': title,
-      }),
     );
 
-    if (response.statusCode != 201) {
+    if (response.statusCode != 200) { // 성공 시 HTTP 상태 코드가 200임을 확인
       throw Exception('Failed to register task');
     }
   }
+
 
   Future<List<Task>> getTasksByName(String taskName) async {
     final response = await http.get(Uri.parse('$baseUrl/api/tasks?task=$taskName'));

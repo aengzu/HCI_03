@@ -1,4 +1,4 @@
-# HCI03-Client Side
+# Miracle - Client Side
 ---
 ![image](https://github.com/user-attachments/assets/118ef5c3-37f8-4728-b57e-bce0580a8cc1)
 
